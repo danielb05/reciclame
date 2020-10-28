@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/pages/Home.dart';
+import 'package:reciclame/pages/Settings.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/home',
-        routes: {'/home': (context) => Home()},
+        routes: {'/home': (context) => Home(),
+                  '/settings':(context) => Settings()},
         theme: ThemeData(
             scaffoldBackgroundColor: kBackgroundColor,
             primaryColor: kPrimaryColor,
