@@ -37,22 +37,24 @@ class _HomeState extends State<Home> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: const<BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt),
-            label: 'Scan',
+            label: '',
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label:'Home'
+              label:''
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.library_books),
-            label: 'News',
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.account_circle_rounded),
+            label: '',
           ),
         ],
         currentIndex: _selectedIndex,

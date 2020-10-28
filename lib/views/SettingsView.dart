@@ -59,8 +59,6 @@ class _SettingsState extends State<SettingsView> {
                   alignment: Alignment.bottomCenter,
                   child: sessionButton()
                 ))
-
-
         ],
       )
     );
