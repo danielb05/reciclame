@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/widgets/SettingsWidget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 
 class SettingsView extends StatefulWidget {
@@ -11,9 +12,9 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsState extends State<SettingsView> {
-  bool isLogged = true;
+  bool isLogged = false;
 
-  RaisedButton sessionButton(){
+  RaisedButton sessionButton (){
   return !isLogged ? RaisedButton(
       onPressed: (){
         Navigator.pushNamed(context, '/login');
@@ -40,6 +41,12 @@ class _SettingsState extends State<SettingsView> {
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance().then((storage){
+      print(storage.getString('email'));
+      storage.getString('email') == null ? this.isLogged=false : this.isLogged=true;
+    });
+    print(this.isLogged);
+    //No works
   }
 
   @override
