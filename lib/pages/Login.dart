@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 import '../constants.dart';
 
@@ -9,7 +8,7 @@ class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
-// TODO: create form to connect with API and verify the user, after that save the token or user credentials (session) and redirect to /home
+
 class _LoginState extends State<Login> {
 
   final _formKey = GlobalKey<FormState>();
@@ -18,7 +17,6 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -182,7 +180,7 @@ class _LoginState extends State<Login> {
         elevation: 5.0,
         onPressed: (){
           _formKey.currentState.save();
-          print(email+" "+password);
+          print("User logged: "+email);
           if(email=='admin' && password =='password'){
             storageUser(email);
             Navigator.pushNamed(context, '/home');

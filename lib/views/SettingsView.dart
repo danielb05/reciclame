@@ -12,7 +12,28 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsState extends State<SettingsView> {
-  bool isLogged = false;
+  bool isLogged=false;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCredentials();
+  }
+
+  _getCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isLogged=prefs.getString('email')!=null?true:false;
+    });
+  }
+
+  _removeCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('email');
+    setState(() {
+      isLogged=false;
+    });
+  }
 
   RaisedButton sessionButton (){
   return !isLogged ? RaisedButton(
@@ -28,25 +49,11 @@ class _SettingsState extends State<SettingsView> {
       :
   RaisedButton(
       onPressed: (){
-        setState(() {
-          isLogged = false;
-          //Remove credentials
-        });
+        _removeCredentials();
       },
       color: Colors.redAccent,
       child: Text('Close session')
   );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    SharedPreferences.getInstance().then((storage){
-      print(storage.getString('email'));
-      storage.getString('email') == null ? this.isLogged=false : this.isLogged=true;
-    });
-    print(this.isLogged);
-    //No works
   }
 
   @override
