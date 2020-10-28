@@ -7,18 +7,18 @@ const kBackgroundColor = Color(0xFFF9F8FD);
 const double kDefaultPadding = 20.0;
 
 final kHintTextStyle = TextStyle(
-  color: Colors.white54,
+  color: Colors.black,
   fontFamily: 'OpenSans',
 );
 
 final kLabelStyle = TextStyle(
-  color: Colors.white,
+  color: Colors.black,
   fontWeight: FontWeight.bold,
   fontFamily: 'OpenSans',
 );
 
 final kBoxDecorationStyle = BoxDecoration(
-  color: Color(0xFF6CA8F1),
+  color: Color(0xFFd8f3dc),
   borderRadius: BorderRadius.circular(10.0),
   boxShadow: [
     BoxShadow(

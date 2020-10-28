@@ -24,6 +24,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -38,10 +39,10 @@ class _LoginState extends State<Login> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0xFF73AEF5),
-                      Color(0xFF61A4F1),
-                      Color(0xFF478DE0),
-                      Color(0xFF398AE5),
+                      Color(0xFFb7e4c7),
+                      Color(0xFF52b788),
+                      Color(0xFF40916c),
+                      Color(0xFF2d6a4f),
                     ],
                     stops: [0.1, 0.4, 0.7, 0.9],
                   ),
@@ -63,7 +64,7 @@ class _LoginState extends State<Login> {
                         Text(
                           'Sign In',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'OpenSans',
                             fontSize: 30.0,
                             fontWeight: FontWeight.bold,
@@ -117,7 +118,7 @@ class _LoginState extends State<Login> {
             onSaved: (val) => setState(() => this.email = val),
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
@@ -125,7 +126,7 @@ class _LoginState extends State<Login> {
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.email,
-                color: Colors.white,
+                color: Colors.black,
               ),
               hintText: 'Enter your Email',
               hintStyle: kHintTextStyle,
@@ -153,7 +154,7 @@ class _LoginState extends State<Login> {
             onSaved: (val) => setState(() => this.password = val),
             obscureText: true,
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
@@ -161,7 +162,7 @@ class _LoginState extends State<Login> {
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.lock,
-                color: Colors.white,
+                color: Colors.black,
               ),
               hintText: 'Enter your Password',
               hintStyle: kHintTextStyle,
@@ -196,7 +197,7 @@ class _LoginState extends State<Login> {
         child: Text(
           'LOGIN',
           style: TextStyle(
-            color: Color(0xFF527DAA),
+            color: Color(0xFF2d6a4f),
             letterSpacing: 1.5,
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
