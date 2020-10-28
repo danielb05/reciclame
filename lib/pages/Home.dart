@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'file:///C:/Users/francesc/Desktop/reciclame/lib/views/SettingsView.dart';
 import 'package:reciclame/views/HomeView.dart';
 import '../constants.dart';
 
@@ -9,12 +10,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = [
     Text('Take Photo'),
     HomeView(),
-    Text('News')
+    Text('News'),
+    SettingsView()
   ];
 
   void _onItemTapped(int index) {
@@ -29,23 +31,16 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('RECICLAME'),
         centerTitle: true,
-        actions: [
-          IconButton(
-              icon:Icon(Icons.settings),
-              onPressed: (){
-              Navigator.pushNamed(context, '/settings');
-          })
-
-        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const<BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt),
-            label: 'Camera',
+            label: 'Scan',
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -54,6 +49,10 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.library_books),
             label: 'News',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
           ),
         ],
         currentIndex: _selectedIndex,

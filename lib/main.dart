@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/pages/Home.dart';
-import 'package:reciclame/pages/Settings.dart';
+import 'package:reciclame/pages/Login.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/home',
         routes: {'/home': (context) => Home(),
-                  '/settings':(context) => Settings()},
+                  '/login': (context) => Login()},
         theme: ThemeData(
             scaffoldBackgroundColor: kBackgroundColor,
             primaryColor: kPrimaryColor,
