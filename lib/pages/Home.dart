@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/francesc/Desktop/reciclame/lib/views/SettingsView.dart';
+import 'package:reciclame/views/SettingsView.dart';
 import 'package:reciclame/views/HomeView.dart';
 import '../constants.dart';
 
