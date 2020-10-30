@@ -97,6 +97,9 @@ class _LoginState extends State<Login> {
     // Storage
     SharedPreferences storage = await SharedPreferences.getInstance();
     storage.setString('email',email);
+    storage.setString('fullname',"Maria Moon Green");
+    storage.setString('location',"Spain");
+    storage.setInt('level',3);
   }
 
 
