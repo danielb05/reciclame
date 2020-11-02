@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:reciclame/pages/SignUp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../constants.dart';
 
 class Login extends StatefulWidget {
@@ -19,7 +19,6 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +174,6 @@ class _LoginState extends State<Login> {
       ],
     );
   }
-
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -210,10 +208,11 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => print('Sign Up Button Pressed'),
+      onTap:(){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+      },
       child: RichText(
         text: TextSpan(
           children: [
@@ -238,8 +237,4 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
-
-
-
 }
