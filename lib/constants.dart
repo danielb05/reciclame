@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show BorderRadius, BoxDecoration, BoxShadow, Color, Colors, FontWeight, Offset, TextStyle;
 
 const kPrimaryColor = Color(0xFF0C9869);
 const kTextColor = Color(0xFF3C4046);

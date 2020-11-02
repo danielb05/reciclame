@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show AppBar, BottomNavigationBar, BottomNavigationBarItem, BottomNavigationBarType, BuildContext, Center, Icon, Icons, Key, Scaffold, State, StatefulWidget, Text, Widget;
 import 'package:reciclame/views/SettingsView.dart';
 import 'package:reciclame/views/HomeView.dart';
 import '../constants.dart';
