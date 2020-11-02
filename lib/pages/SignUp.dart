@@ -10,13 +10,16 @@ TextEditingController passwordValue = new TextEditingController();
 TextEditingController confirmPasswordValue = new TextEditingController();
 TextEditingController userName = new TextEditingController();
 TextEditingController phoneNumberValue = new TextEditingController();
-TextEditingController errorMessage = new TextEditingController();
+TextEditingController errorMessage = new TextEditingController(); // Change to string the user can edit this information.
 
 class SignUp extends StatefulWidget {
   @override
   _SignUp createState() => _SignUp();
 }
 class _SignUp extends State<SignUp> {
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     showAlertDialog(BuildContext context) {
@@ -55,6 +58,7 @@ class _SignUp extends State<SignUp> {
                 body: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 50.0),
                   child: Form(
+                    key: _formKey,
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
@@ -128,7 +132,6 @@ class _SignUp extends State<SignUp> {
                               child: Text('Register'),
                               onPressed: (){
                                 errorMessage.text="";
-                                print('hello');
                                 if(passwordValue.text !=confirmPasswordValue.text){
                                   errorMessage.text += "Passwords doesn't match! \n \n";
                                 }
@@ -139,6 +142,7 @@ class _SignUp extends State<SignUp> {
                                 if(errorMessage.text.isEmpty){
                                   showAlertDialog(context);
                                 }
+                                  _formKey.currentState.save();
                               }
                           ),
                           SizedBox(height: 20, width: 40,),

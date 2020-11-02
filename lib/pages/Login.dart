@@ -77,7 +77,7 @@ class _LoginState extends State<Login> {
                         _buildPasswordTF(),
 
                         _buildLoginBtn(),
-                        _buildSignupBtn(), //TODO: redirect sign up
+                        _buildSignupBtn(),
                       ],
                     ),
                   )
