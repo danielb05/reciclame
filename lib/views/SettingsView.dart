@@ -27,7 +27,7 @@ class _SettingsState extends State<SettingsView> {
   _getCredentials() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      isLogged = prefs.getString('email') != null ? true : false;
+      isLogged = (prefs.getString('email') ?? 0) == null ? false : true;
       email = prefs.getString('email') != null ? "admin@gmail.com" : '-';
       fullname = prefs.getString('fullname') != null ? prefs.getString('fullname') : 'Anonymous';
       level = prefs.getInt('level') != null ? prefs.getInt('level') : 1;
@@ -80,7 +80,7 @@ class _SettingsState extends State<SettingsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            AccountWidget(fullname: fullname, email: email, level: level, location: location, language: language,isLogged: isLogged,),
+            AccountWidget(fullname: fullname, email: email, level: level, location: location, language: language,isLogged: isLogged),
             Spacer(),
             Divider(color: kTextColor),
             Padding(

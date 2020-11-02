@@ -11,13 +11,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 1;
+  List<Widget> _widgetOptions;
 
-  static const List<Widget> _widgetOptions = [
-    Text('Take Photo'),
-    HomeView(),
-    Text('News'),
-    SettingsView()
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _widgetOptions = [
+      Text('Take Photo'),
+      HomeView(),
+      Text('News'),
+      SettingsView()
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
