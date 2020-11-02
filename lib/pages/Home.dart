@@ -1,10 +1,27 @@
-import 'package:flutter/material.dart' show AppBar, BottomNavigationBar, BottomNavigationBarItem, BottomNavigationBarType, BuildContext, Center, Icon, Icons, Key, Scaffold, State, StatefulWidget, Text, Widget;
-import 'package:reciclame/views/SettingsView.dart';
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        BottomNavigationBar,
+        BottomNavigationBarItem,
+        BottomNavigationBarType,
+        BuildContext,
+        Center,
+        Icon,
+        Icons,
+        Key,
+        Scaffold,
+        State,
+        StatefulWidget,
+        Text,
+        Widget;
+import 'package:flutter/material.dart';
+import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/views/HomeView.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -29,12 +46,11 @@ class _HomeState extends State<Home> {
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('RECICLAME'),
+        title: Text(getTranslated(context, 'title').toUpperCase()),
         centerTitle: true,
       ),
       body: Center(
@@ -44,15 +60,12 @@ class _HomeState extends State<Home> {
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        items: const<BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.camera_alt),
             label: '',
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label:''
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
           BottomNavigationBarItem(
             icon: Icon(Icons.library_books),
             label: '',
@@ -69,5 +82,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-

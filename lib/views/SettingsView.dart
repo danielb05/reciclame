@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:reciclame/localization/language.dart';
+import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/widgets/AccountWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
+import '../main.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView();
@@ -72,6 +76,12 @@ class _SettingsState extends State<SettingsView> {
             color: Colors.redAccent,
             child: Text('Close session'));
   }
+
+  void _changeLanguage(Language language) async {
+    Locale _locale = await setLocale(language.languageCode);
+    MyApp.setLocale(context, _locale);
+  }
+
 
   @override
   Widget build(BuildContext context) {

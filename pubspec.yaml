@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   http: ^0.12.2
   shared_preferences: ^0.5.12+2
 
@@ -50,6 +52,8 @@ flutter:
   assets:
     - assets/avatar.jpg
     - assets/anonymous.jpg
+    - lib/lang/en.json
+    - lib/lang/es.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
