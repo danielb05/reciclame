@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/widgets/AccountWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
@@ -16,7 +17,6 @@ class _SettingsState extends State<SettingsView> {
   String fullname = "Anonymous";
   int level = 1;
   String location = "Undefined";
-  var language = {'en_US': 'English'};
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class _SettingsState extends State<SettingsView> {
               Navigator.pushNamed(context, '/login');
             },
             child:
-                Text('Log in / Sign up', style: TextStyle(color: kTextColor)),
+                Text(getTranslated(context, 'log_in'), style: TextStyle(color: kTextColor)),
             color: kPrimaryColor,
           )
         : RaisedButton(
@@ -70,7 +70,7 @@ class _SettingsState extends State<SettingsView> {
               //Navigator.pushNamed(context, '/home');
             },
             color: Colors.redAccent,
-            child: Text('Close session'));
+            child: Text(getTranslated(context, 'close_session')));
   }
 
   @override
@@ -80,7 +80,7 @@ class _SettingsState extends State<SettingsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            AccountWidget(fullname: fullname, email: email, level: level, location: location, language: language,isLogged: isLogged),
+            AccountWidget(fullname: fullname, email: email, level: level, location: location,isLogged: isLogged),
             Spacer(),
             Divider(color: kTextColor),
             Padding(
