@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/pages/SignUp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
@@ -61,7 +62,7 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          'Sign In',
+                          getTranslated(context, 'sign_in'),
                           style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'OpenSans',
@@ -108,7 +109,7 @@ class _LoginState extends State<Login> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Email',
+          getTranslated(context, 'email'),
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -130,7 +131,7 @@ class _LoginState extends State<Login> {
                 Icons.email,
                 color: Colors.black,
               ),
-              hintText: 'Enter your Email',
+              hintText: getTranslated(context, 'enter_email'),
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -144,7 +145,7 @@ class _LoginState extends State<Login> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Password',
+          getTranslated(context, 'password'),
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -166,7 +167,7 @@ class _LoginState extends State<Login> {
                 Icons.lock,
                 color: Colors.black,
               ),
-              hintText: 'Enter your Password',
+              hintText: getTranslated(context, 'enter_password'),
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -196,7 +197,7 @@ class _LoginState extends State<Login> {
         ),
         color: Colors.white,
         child: Text(
-          'LOGIN',
+          getTranslated(context, 'log_in').toUpperCase(),
           style: TextStyle(
             color: Color(0xFF2d6a4f),
             letterSpacing: 1.5,
@@ -217,7 +218,7 @@ class _LoginState extends State<Login> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: 'Don\'t have an Account? ',
+              text: getTranslated(context, 'create_account'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -225,7 +226,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             TextSpan(
-              text: 'Sign Up',
+              text: getTranslated(context, 'sign_up'),
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,

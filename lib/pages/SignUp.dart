@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:reciclame/constants.dart';
+import 'package:reciclame/localization/language_constants.dart';
 
 void main() {
   runApp(SignUp());
@@ -31,8 +33,8 @@ class _SignUp extends State<SignUp> {
         },
       );
       AlertDialog alert = AlertDialog(
-        title: Text("Thanks for signing up!"),
-        content: Text("Welcome to our application dear "+ userName.text+ " !"),
+        title: Text(getTranslated(context, 'thanks_sign_up')),
+        content: Text(getTranslated(context, 'welcome') + userName.text+ " !"),
         actions: [
           okButton,
         ],
@@ -46,13 +48,9 @@ class _SignUp extends State<SignUp> {
     }
     return Scaffold(
                 appBar: AppBar(
-                  backgroundColor: Colors.green[700],
+                  backgroundColor: kPrimaryColor,
                   title: Align(
                     alignment: Alignment.center,
-                    child: Text(
-                      'Reciclame',
-                      textAlign: TextAlign.center,
-                    ),
                   ),
                 ),
                 body: SingleChildScrollView(
@@ -79,7 +77,7 @@ class _SignUp extends State<SignUp> {
                             controller: emailValue,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                                labelText: 'Email Address',
+                                labelText: getTranslated(context, "email"),
                                 suffixIcon: Icon(Icons.email),
                                 labelStyle: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -92,7 +90,7 @@ class _SignUp extends State<SignUp> {
                             controller: passwordValue,
                             obscureText: true,
                             decoration: InputDecoration(
-                                labelText: 'Password',
+                                labelText: getTranslated(context, "password"),
                                 suffixIcon: Icon(Icons.lock),
                                 labelStyle: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -105,7 +103,7 @@ class _SignUp extends State<SignUp> {
                             controller: confirmPasswordValue,
                             obscureText: true,
                             decoration: InputDecoration(
-                                labelText: 'Confirm Password',
+                                labelText: getTranslated(context, 'confirm_password'),
                                 suffixIcon: Icon(Icons.lock),
                                 labelStyle: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -118,7 +116,7 @@ class _SignUp extends State<SignUp> {
                             controller: phoneNumberValue,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                                labelText: 'Phone Number',
+                                labelText: getTranslated(context,'phone_number'),
                                 suffixIcon: Icon(Icons.phone),
                                 labelStyle: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -128,12 +126,12 @@ class _SignUp extends State<SignUp> {
                           ),
                           SizedBox(height: 20.0),
                           RaisedButton(
-                              color: Colors.green[700],
-                              child: Text('Register'),
+                              color: kPrimaryColor,
+                              child: Text(getTranslated(context,'sign_up').toUpperCase()),
                               onPressed: (){
                                 errorMessage.text="";
                                 if(passwordValue.text !=confirmPasswordValue.text){
-                                  errorMessage.text += "Passwords doesn't match! \n \n";
+                                  errorMessage.text += getTranslated(context,'password_not_match');
                                 }
                                 if (passwordValue.text.isEmpty || phoneNumberValue.text.isEmpty || confirmPasswordValue.text.isEmpty ||
                                     emailValue.text.isEmpty  ||userName.text.isEmpty ){

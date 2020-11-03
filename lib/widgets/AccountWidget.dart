@@ -64,7 +64,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                 height: 40,
                 color: kPrimaryColor,
               ),
-              Text('Name'.toUpperCase(),
+              Text(getTranslated(context, 'name').toUpperCase(),
                   style: TextStyle(
                       color: kPrimaryColor,
                       letterSpacing: 2.0,
@@ -75,7 +75,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                   style:
                   TextStyle(color: Colors.black, letterSpacing: 2.0)),
               SizedBox(height: 20.0),
-              Text('Email'.toUpperCase(),
+              Text(getTranslated(context, 'email').toUpperCase(),
                   style: TextStyle(
                       color: kPrimaryColor,
                       letterSpacing: 2.0,
@@ -86,7 +86,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                   style:
                   TextStyle(color: Colors.black, letterSpacing: 2.0)),
               SizedBox(height: 20.0),
-              Text('Level'.toUpperCase(),
+              Text(getTranslated(context, 'level').toUpperCase(),
                   style: TextStyle(
                       color: kPrimaryColor,
                       letterSpacing: 2.0,
@@ -97,7 +97,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                   style:
                   TextStyle(color: Colors.black, letterSpacing: 2.0)),
               SizedBox(height: 20.0),
-              Text('Location'.toUpperCase(),
+              Text(getTranslated(context, 'location').toUpperCase(),
                   style: TextStyle(
                       color: kPrimaryColor,
                       letterSpacing: 2.0,
@@ -108,7 +108,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                   style:
                   TextStyle(color: Colors.black, letterSpacing: 2.0)),
               SizedBox(height: 20.0),
-              Text('Language'.toUpperCase(),
+              Text(getTranslated(context, 'language').toUpperCase(),
                   style: TextStyle(
                       color: kPrimaryColor,
                       letterSpacing: 2.0,
