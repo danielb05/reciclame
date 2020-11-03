@@ -1,4 +1,7 @@
 {
   "close_session":"Cerrar sesión.",
-  "title": "Reciclame"
+  "title": "Reciclame",
+  "log_in": "Iniciar sesión",
+  "en": "Ingles",
+  "es": "Español"
 }

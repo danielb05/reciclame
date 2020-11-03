@@ -18,6 +18,16 @@ class MyApp extends StatefulWidget {
     state.setLocale(newLocale);
   }
 
+  static String getLang(BuildContext context){
+    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
+    return state.getLang();
+  }
+
+  static Locale getLocale(BuildContext context){
+    _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
+    return state.getLocate();
+  }
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -25,11 +35,21 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   Locale _locale;
+
   setLocale(Locale locale) {
     setState(() {
       _locale = locale;
     });
   }
+
+  getLocate(){
+    return _locale;
+  }
+
+  getLang(){
+    return _locale.toString();
+  }
+
 
   @override
   void didChangeDependencies() {

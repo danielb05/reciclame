@@ -17,6 +17,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/views/HomeView.dart';
+import 'package:reciclame/views/SettingsView.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
