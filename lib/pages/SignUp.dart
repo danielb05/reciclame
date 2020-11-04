@@ -9,6 +9,7 @@ TextEditingController emailValue = new TextEditingController();
 TextEditingController passwordValue = new TextEditingController();
 TextEditingController confirmPasswordValue = new TextEditingController();
 TextEditingController userName = new TextEditingController();
+TextEditingController fullName = new TextEditingController();
 TextEditingController phoneNumberValue = new TextEditingController();
 TextEditingController errorMessage = new TextEditingController();
 
@@ -29,7 +30,7 @@ class _SignUp extends State<SignUp> {
       );
       AlertDialog alert = AlertDialog(
         title: Text("Thanks for signing up!"),
-        content: Text("Welcome to our application dear "+ userName.text+ " !"),
+        content: Text("Welcome to our application dear "+ fullName.text+ " !"),
         actions: [
           okButton,
         ],
@@ -58,6 +59,18 @@ class _SignUp extends State<SignUp> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
+                          SizedBox(height: 20.0),
+                          TextField(
+                            controller: fullName,
+                            decoration: InputDecoration(
+                                labelText: 'Full name:',
+                                suffixIcon: Icon(Icons.person),
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey,
+                                )
+                            ),
+                          ),
                           SizedBox(height: 20.0),
                           TextField(
                             controller: userName,
