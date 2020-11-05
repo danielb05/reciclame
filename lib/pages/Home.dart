@@ -16,6 +16,7 @@ import 'package:flutter/material.dart'
         Widget;
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/views/FindView.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
@@ -26,17 +27,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
   List<Widget> _widgetOptions;
 
   @override
   void initState() {
     super.initState();
     _widgetOptions = [
-      Text('Scan Object'),
-      Text('Location'),
-      Text('List'),
-      Text('List'),
+      Text('Scan Object'),//Scan ObjectView
+      Text('Location'), //LocationView
+      FindView(),
+      Text('List'), //ListView
     ];
   }
 
@@ -57,7 +58,7 @@ class _HomeState extends State<Home> {
             onTap: (){
               Navigator.pushNamed(context, '/settings');
             },
-            child: Icon(Icons.settings,size: 26.0),
+            child: Icon(Icons.settings,size: 22.0),
           ),)
         ],
       ),
@@ -71,8 +72,8 @@ class _HomeState extends State<Home> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.account_circle_rounded), label: ''),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: kPrimaryColor,
