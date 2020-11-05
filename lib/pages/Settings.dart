@@ -13,10 +13,10 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   bool isLogged = false;
-  String  email = "-";
-  String fullname = "Anonymous";
-  int level = 1;
-  String location = "Undefined";
+  String  email;
+  String fullname;
+  int level;
+  String location;
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _SettingsState extends State<Settings> {
   _getCredentials() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      isLogged = prefs.getString('email') == null ? false : true;
+      isLogged = (prefs.getBool('isLogged') == null) ? false : prefs.getBool('isLogged');
       email = prefs.getString('email') != null ? "admin@gmail.com" : '-';
       fullname = prefs.getString('fullname') != null ? prefs.getString('fullname') : 'Anonymous';
       level = prefs.getInt('level') != null ? prefs.getInt('level') : 1;
@@ -36,7 +36,6 @@ class _SettingsState extends State<Settings> {
   }
 
   _initCredentials() async {
-    isLogged = false;
     email = "-";
     fullname = "Anonymous";
     level = 1;
@@ -46,11 +45,12 @@ class _SettingsState extends State<Settings> {
   _removeCredentials() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _initCredentials();
       prefs.remove('email');
       prefs.remove('fullname');
       prefs.remove('level');
       prefs.remove('location');
+      prefs.remove('isLogged');
+      _initCredentials();
     });
   }
 
@@ -67,7 +67,7 @@ class _SettingsState extends State<Settings> {
         : RaisedButton(
             onPressed: () {
               _removeCredentials();
-              //Navigator.pushNamed(context, '/home');
+              Navigator.pushNamed(context, '/home');
             },
             color: Colors.redAccent,
             child: Text(getTranslated(context, 'close_session')));

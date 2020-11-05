@@ -100,6 +100,7 @@ class _LoginState extends State<Login> {
     storage.setString('fullname',"Maria Moon Green");
     storage.setString('location',"Spain");
     storage.setInt('level',3);
+    storage.setBool('isLogged', true);
   }
 
 
