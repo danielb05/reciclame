@@ -9,8 +9,7 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 150,
+    return Card(
         color: Colors.green[100],
         child: Padding(
             padding: EdgeInsets.all(10),
