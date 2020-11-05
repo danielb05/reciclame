@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/pages/Home.dart';
 import 'package:reciclame/pages/Login.dart';
+import 'package:reciclame/pages/Opening.dart';
 import 'package:reciclame/pages/Settings.dart';
 import 'package:reciclame/pages/SignUp.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -87,9 +88,10 @@ class _MyAppState extends State<MyApp> {
           return supportedLocales.first;
         },
         debugShowCheckedModeBanner: false,
-        initialRoute: '/home',
+        initialRoute: '/opening',
         routes: {'/home': (context) => Home(),
                   '/login': (context) => Login(),
+                  '/opening': (context) => Opening(),
                   '/settings': (context) => Settings(),
                   '/signup': (context) => SignUp(),
         },

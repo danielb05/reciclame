@@ -52,6 +52,7 @@ flutter:
   assets:
     - assets/avatar.jpg
     - assets/anonymous.jpg
+    - assets/opening.png
     - lib/lang/en.json
     - lib/lang/es.json
 
