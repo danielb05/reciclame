@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reciclame/constants.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/widgets/ItemWidget.dart';
 
 class FindView extends StatefulWidget {
   @override
@@ -72,32 +72,9 @@ class _FindViewState extends State<FindView> {
                 return GestureDetector(
                   onTap: (){
                     print(entries[index]);
+                    Navigator.pushNamed(context, '/item',arguments: {"item":entries[index]});
                   },
-                  child: Container(
-                      height: 150,
-                      color: Colors.green[100],
-                      child: Padding(
-                          padding: EdgeInsets.all(10),
-                          child:Center(
-                            child:
-                            Row(
-                                children:[
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(15),
-                                        child: CircleAvatar(
-                                          backgroundImage:AssetImage('assets/'+entries[index]+'.jpg'),
-                                          radius: 50.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text('Entry ${entries[index]}'),
-                                ]),
-                          )
-                      )
-                  ),
+                  child: ItemWidget(entries: entries[index]),
                 );
               },
               separatorBuilder: (BuildContext context, int index) => const Divider(),

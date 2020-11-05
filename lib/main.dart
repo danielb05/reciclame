@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/pages/Home.dart';
+import 'package:reciclame/pages/ItemDetail.dart';
 import 'package:reciclame/pages/Login.dart';
 import 'package:reciclame/pages/Opening.dart';
 import 'package:reciclame/pages/Settings.dart';
@@ -94,6 +95,7 @@ class _MyAppState extends State<MyApp> {
                   '/opening': (context) => Opening(),
                   '/settings': (context) => Settings(),
                   '/signup': (context) => SignUp(),
+                  '/item':(context)=> ItemDetail(ModalRoute.of(context).settings.arguments)
         },
         theme: ThemeData(
             scaffoldBackgroundColor: kBackgroundColor,
