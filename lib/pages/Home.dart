@@ -17,6 +17,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/views/FindView.dart';
+import 'package:reciclame/pages/BinLocator.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
@@ -35,7 +36,7 @@ class _HomeState extends State<Home> {
     super.initState();
     _widgetOptions = [
       Text('Scan Object'),//Scan ObjectView
-      Text('Location'), //LocationView
+      BinLocator(), //LocationView
       FindView(),
       Text('List'), //ListView
     ];
@@ -71,7 +72,8 @@ class _HomeState extends State<Home> {
         showUnselectedLabels: false,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.location_on), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.location_on),
+              label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: ''),
         ],

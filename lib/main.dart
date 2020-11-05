@@ -6,6 +6,7 @@ import 'package:reciclame/pages/Login.dart';
 import 'package:reciclame/pages/Opening.dart';
 import 'package:reciclame/pages/Settings.dart';
 import 'package:reciclame/pages/SignUp.dart';
+import 'package:reciclame/pages/BinLocator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localization/demo_localization.dart';
 import 'localization/language_constants.dart';
@@ -95,6 +96,7 @@ class _MyAppState extends State<MyApp> {
                   '/opening': (context) => Opening(),
                   '/settings': (context) => Settings(),
                   '/signup': (context) => SignUp(),
+                  '/binlocator': (context) => BinLocator(),
                   '/item':(context)=> ItemDetail(ModalRoute.of(context).settings.arguments)
         },
         theme: ThemeData(
