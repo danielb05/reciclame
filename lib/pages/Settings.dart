@@ -4,14 +4,14 @@ import 'package:reciclame/widgets/AccountWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 
-class SettingsView extends StatefulWidget {
-  const SettingsView();
+class Settings extends StatefulWidget {
+  const Settings();
 
   @override
   _SettingsState createState() => _SettingsState();
 }
 
-class _SettingsState extends State<SettingsView> {
+class _SettingsState extends State<Settings> {
   bool isLogged = false;
   String  email = "-";
   String fullname = "Anonymous";
@@ -75,19 +75,22 @@ class _SettingsState extends State<SettingsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            AccountWidget(fullname: fullname, email: email, level: level, location: location,isLogged: isLogged),
-            Spacer(),
-            Divider(color: kTextColor),
-            Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Align(
-                    alignment: Alignment.bottomCenter, child: sessionButton()))
-          ],
-        ));
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+          padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              AccountWidget(fullname: fullname, email: email, level: level, location: location,isLogged: isLogged),
+              Spacer(),
+              Divider(color: kTextColor),
+              Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Align(
+                      alignment: Alignment.bottomCenter, child: sessionButton()))
+            ],
+          )),
+    );
   }
 }

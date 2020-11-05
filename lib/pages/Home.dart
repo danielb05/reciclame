@@ -16,8 +16,7 @@ import 'package:flutter/material.dart'
         Widget;
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
-import 'package:reciclame/views/HomeView.dart';
-import 'package:reciclame/views/SettingsView.dart';
+import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/Settings.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
@@ -35,10 +34,10 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _widgetOptions = [
-      Text('Take Photo'),
-      HomeView(),
-      Text('News'),
-      SettingsView()
+      Text('Scan Object'),
+      Text('Location'),
+      Text('List'),
+      Text('List'),
     ];
   }
 
@@ -53,6 +52,15 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text(getTranslated(context, 'title').toUpperCase()),
         centerTitle: true,
+        actions: [
+          Padding(padding: EdgeInsets.only(right: 20.0),
+          child: GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context, '/settings');
+            },
+            child: Icon(Icons.settings,size: 26.0),
+          ),)
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -62,19 +70,10 @@ class _HomeState extends State<Home> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera_alt),
-            label: '',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.library_books),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: '',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.location_on), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle_rounded), label: ''),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: kPrimaryColor,

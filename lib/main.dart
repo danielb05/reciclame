@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/pages/Home.dart';
 import 'package:reciclame/pages/Login.dart';
+import 'package:reciclame/pages/Settings.dart';
 import 'package:reciclame/pages/SignUp.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localization/demo_localization.dart';
@@ -89,6 +90,7 @@ class _MyAppState extends State<MyApp> {
         initialRoute: '/home',
         routes: {'/home': (context) => Home(),
                   '/login': (context) => Login(),
+                  '/settings': (context) => Settings(),
                   '/signup': (context) => SignUp(),
         },
         theme: ThemeData(
