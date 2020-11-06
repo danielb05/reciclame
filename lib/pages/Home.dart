@@ -17,6 +17,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/views/FindView.dart';
+import 'package:reciclame/views/HistoryDataView.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
@@ -37,7 +38,7 @@ class _HomeState extends State<Home> {
       Text('Scan Object'),//Scan ObjectView
       Text('Location'), //LocationView
       FindView(),
-      Text('List'), //ListView
+      HistoryDataView(), //ListView
     ];
   }
 
