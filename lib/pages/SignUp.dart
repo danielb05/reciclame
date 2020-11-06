@@ -11,8 +11,9 @@ TextEditingController emailValue = new TextEditingController();
 TextEditingController passwordValue = new TextEditingController();
 TextEditingController confirmPasswordValue = new TextEditingController();
 TextEditingController userName = new TextEditingController();
+TextEditingController fullName = new TextEditingController();
 TextEditingController phoneNumberValue = new TextEditingController();
-TextEditingController errorMessage = new TextEditingController(); // Change to string the user can edit this information.
+TextEditingController errorMessage = new TextEditingController();
 
 class SignUp extends StatefulWidget {
   @override
@@ -48,9 +49,13 @@ class _SignUp extends State<SignUp> {
     }
     return Scaffold(
                 appBar: AppBar(
-                  backgroundColor: kPrimaryColor,
+                  backgroundColor: Colors.green[700],
                   title: Align(
                     alignment: Alignment.center,
+                    child: Text(
+                      'Reciclame',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
                 body: SingleChildScrollView(
@@ -60,6 +65,18 @@ class _SignUp extends State<SignUp> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
+                          SizedBox(height: 20.0),
+                          TextField(
+                            controller: fullName,
+                            decoration: InputDecoration(
+                                labelText: 'Full name:',
+                                suffixIcon: Icon(Icons.person),
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey,
+                                )
+                            ),
+                          ),
                           SizedBox(height: 20.0),
                           TextField(
                             controller: userName,
@@ -130,6 +147,7 @@ class _SignUp extends State<SignUp> {
                               child: Text(getTranslated(context,'sign_up').toUpperCase()),
                               onPressed: (){
                                 errorMessage.text="";
+                                print('hello');
                                 if(passwordValue.text !=confirmPasswordValue.text){
                                   errorMessage.text += getTranslated(context,'password_not_match');
                                 }
