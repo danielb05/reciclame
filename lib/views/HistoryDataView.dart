@@ -17,12 +17,102 @@ class _HistoryDataViewState extends State<HistoryDataView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //PieChart(),
-            Divider(height: 10,color: kPrimaryColor),
+          _getPieChart(),
+            SizedBox(height: 10),
             _getLinealChart()
           ],
         ),
     );
+  }
+
+  AspectRatio _getPieChart() {
+    return AspectRatio(
+        aspectRatio: 1.3,
+        child: Card(
+          color: Colors.white,
+          child: Row(
+            children: <Widget>[
+              const SizedBox(
+                height: 18,
+              ),
+              Expanded(
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: PieChart(
+                    PieChartData(
+                        pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
+                          setState(() {
+                            if (pieTouchResponse.touchInput is FlLongPressEnd ||
+                                pieTouchResponse.touchInput is FlPanEnd) {
+                              touchedIndex = -1;
+                            } else {
+                              touchedIndex = pieTouchResponse.touchedSectionIndex;
+                            }
+                          });
+                        }),
+                        borderData: FlBorderData(
+                          show: false,
+                        ),
+                        sectionsSpace: 0,
+                        centerSpaceRadius: 40,
+                        sections: showingSections(touchedIndex)),
+                  ),
+                ),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const <Widget>[
+                  Indicator(
+                    color: Color(0xff0293ee),
+                    text: 'Paper',
+                    isSquare: true,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Indicator(
+                    color: Colors.brown,
+                    text: 'Organic',
+                    isSquare: true,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Indicator(
+                    color: Color(0xFFFDD835),
+                    text: 'Plastic',
+                    isSquare: true,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Indicator(
+                    color: Color(0xff13d38e),
+                    text: 'Glass',
+                    isSquare: true,
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Indicator(
+                    color: Colors.grey,
+                    text: 'Non-recyclable',
+                    isSquare: true,
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                width: 28,
+              ),
+            ],
+          ),
+        ),
+      );
   }
 
   AspectRatio _getLinealChart() {
@@ -90,6 +180,7 @@ class _HistoryDataViewState extends State<HistoryDataView> {
           );
   }
 }
+
 LineChartData sampleData() {
   return LineChartData(
     lineTouchData: LineTouchData(
@@ -176,15 +267,15 @@ LineChartData sampleData() {
 }
 
 List<LineChartBarData> linesBarData1() {
-  final LineChartBarData lineChartBarData1 = LineChartBarData(
+  final LineChartBarData green = LineChartBarData(
     spots: [
-      FlSpot(1, 1),
-      FlSpot(3, 1.5),
-      FlSpot(5, 1.4),
-      FlSpot(7, 3.4),
-      FlSpot(10, 2),
-      FlSpot(12, 2.2),
-      FlSpot(13, 1.8),
+      FlSpot(1, 0.5),
+      FlSpot(3, 1),
+      FlSpot(5, 1.5),
+      FlSpot(7, 1.9),
+      FlSpot(10, 2.3),
+      FlSpot(12, 2.5),
+      FlSpot(13, 2.6),
     ],
     isCurved: true,
     colors: [
@@ -199,19 +290,18 @@ List<LineChartBarData> linesBarData1() {
       show: false,
     ),
   );
-  final LineChartBarData lineChartBarData2 = LineChartBarData(
+  final LineChartBarData brown = LineChartBarData(
     spots: [
       FlSpot(1, 1),
-      FlSpot(3, 2.8),
-      FlSpot(7, 1.2),
-      FlSpot(10, 2.8),
-      FlSpot(12, 2.6),
-      FlSpot(13, 3.9),
+      FlSpot(3, 1.2),
+      FlSpot(5, 1.7),
+      FlSpot(7, 1.9),
+      FlSpot(10, 2.5),
+      FlSpot(12, 3.6),
+      FlSpot(13, 4),
     ],
     isCurved: true,
-    colors: [
-      const Color(0xffaa4cfc),
-    ],
+    colors: [Colors.brown],
     barWidth: 3,
     isStrokeCapRound: true,
     dotData: FlDotData(
@@ -221,13 +311,13 @@ List<LineChartBarData> linesBarData1() {
       const Color(0x00aa4cfc),
     ]),
   );
-  final LineChartBarData lineChartBarData3 = LineChartBarData(
+  final LineChartBarData blue = LineChartBarData(
     spots: [
-      FlSpot(1, 2.8),
-      FlSpot(3, 1.9),
-      FlSpot(6, 3),
-      FlSpot(10, 1.3),
-      FlSpot(13, 2.5),
+      FlSpot(1, 0.1),
+      FlSpot(3, 0.2),
+      FlSpot(6, 0.3),
+      FlSpot(10, 0.5),
+      FlSpot(13, 0.8),
     ],
     isCurved: true,
     colors: const [
@@ -242,13 +332,113 @@ List<LineChartBarData> linesBarData1() {
       show: false,
     ),
   );
+  final LineChartBarData yellow = LineChartBarData(
+    spots: [
+      FlSpot(1, 1),
+      FlSpot(3, 1.6),
+      FlSpot(6, 2.5),
+      FlSpot(10, 3),
+      FlSpot(13, 5),
+    ],
+    isCurved: true,
+    colors: const [
+      Color(0xFFFDD835)
+    ],
+    barWidth: 3,
+    isStrokeCapRound: true,
+    dotData: FlDotData(
+      show: false,
+    ),
+    belowBarData: BarAreaData(
+      show: false,
+    ),
+  );
+  final LineChartBarData non_recyclable = LineChartBarData(
+    spots: [
+      FlSpot(1, 0.2),
+      FlSpot(3, 0.5),
+      FlSpot(6, 0.7),
+      FlSpot(10, 0.8),
+      FlSpot(13, 1),
+    ],
+    isCurved: true,
+    colors: const [
+      Colors.grey
+    ],
+    barWidth: 3,
+    isStrokeCapRound: true,
+    dotData: FlDotData(
+      show: false,
+    ),
+    belowBarData: BarAreaData(
+      show: false,
+    ),
+  );
   return [
-    lineChartBarData1,
-    lineChartBarData2,
-    lineChartBarData3,
+    green,
+    brown,
+    blue,
+    yellow,
+    non_recyclable
   ];
 }
 
+List<PieChartSectionData> showingSections(int touchedIndex) {
+  return List.generate(5, (i) {
+    final isTouched = i == touchedIndex;
+    final double fontSize = isTouched ? 25 : 16;
+    final double radius = isTouched ? 60 : 50;
+    switch (i) {
+      case 0:
+        return PieChartSectionData(
+          color: const Color(0xff0293ee),
+          value: 6,
+          title: '6%',
+          radius: radius,
+          titleStyle: TextStyle(
+              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+        );
+      case 1:
+        return PieChartSectionData(
+          color: Color(0xFFFDD835),
+          value: 41,
+          title: '41%',
+          radius: radius,
+          titleStyle: TextStyle(
+              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+        );
+      case 2:
+        return PieChartSectionData(
+          color: Colors.brown,
+          value: 25,
+          title: '25%',
+          radius: radius,
+          titleStyle: TextStyle(
+              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+        );
+      case 3:
+        return PieChartSectionData(
+          color: const Color(0xff13d38e),
+          value: 12,
+          title: '12%',
+          radius: radius,
+          titleStyle: TextStyle(
+              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+        );
+      case 4:
+        return PieChartSectionData(
+          color: Colors.grey,
+          value: 16,
+          title: '16%',
+          radius: radius,
+          titleStyle: TextStyle(
+              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+        );
+      default:
+        return null;
+    }
+  });
+}
 class Indicator extends StatelessWidget {
   final Color color;
   final String text;
@@ -282,7 +472,7 @@ class Indicator extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor),
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: textColor),
         )
       ],
     );
