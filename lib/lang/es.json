@@ -5,6 +5,8 @@
   "en": "Ingles",
   "es": "Español",
   "name": "Nombre",
+  "full_name": "Nombre y Apellidos",
+  "username":"Nombre de usuario",
   "email": "Correo electrónico",
   "level": "Nivel",
   "location": "Localización",
@@ -20,5 +22,10 @@
   "all_fields_required:": "Todos los campos son necesarios!",
   "password_not_match":"Las contraseñas no coinciden!",
   "thanks_sign_up": "Gracias por registrarte!",
-  "welcome": "Bienvenido "
+  "welcome": "Bienvenido ",
+  "plastic": "Plastico",
+  "non-recyclable": "Desechos generales",
+  "glass": "Vidrio",
+  "paper": "Papel",
+  "organic": "Orgánico"
 }

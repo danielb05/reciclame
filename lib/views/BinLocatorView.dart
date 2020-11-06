@@ -1,13 +1,12 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 
 void main() {
-  runApp(BinLocator());
+  runApp(BinLocatorView());
 }
 
-class BinLocator extends StatelessWidget {
+class BinLocatorView extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,6 +29,7 @@ class _GMAPState extends State<GoogleMap>{
     }
   }
 }
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;

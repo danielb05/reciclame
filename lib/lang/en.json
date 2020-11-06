@@ -5,6 +5,8 @@
   "en": "English",
   "es": "Spanish",
   "name": "Name",
+  "full_name": "Full name",
+  "username":"User name",
   "email": "Email",
   "level": "Level",
   "location": "Location",
@@ -20,5 +22,10 @@
   "all_fields_required:": "All fields are mandatory!",
   "password_not_match":"Passwords doesn't match!",
   "thanks_sign_up": "Thanks for signing up!",
-  "welcome": "Welcome to our application dear "
+  "welcome": "Welcome to our application dear ",
+  "plastic": "Plastic",
+  "non-recyclable": "Non Recyclable",
+  "glass": "Glass",
+  "paper": "Paper",
+  "organic": "Organic"
 }

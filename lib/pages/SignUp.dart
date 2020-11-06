@@ -53,7 +53,7 @@ class _SignUp extends State<SignUp> {
                   title: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Reciclame',
+                      getTranslated(context, 'title').toUpperCase(),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -69,7 +69,7 @@ class _SignUp extends State<SignUp> {
                           TextField(
                             controller: fullName,
                             decoration: InputDecoration(
-                                labelText: 'Full name:',
+                                labelText: getTranslated(context, 'full_name'),
                                 suffixIcon: Icon(Icons.person),
                                 labelStyle: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -81,7 +81,7 @@ class _SignUp extends State<SignUp> {
                           TextField(
                             controller: userName,
                             decoration: InputDecoration(
-                                labelText: 'Username',
+                                labelText: getTranslated(context, 'username'),
                                 suffixIcon: Icon(Icons.verified_user),
                                 labelStyle: TextStyle(
                                   fontWeight: FontWeight.bold,
