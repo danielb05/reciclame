@@ -1,6 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:reciclame/constants.dart';
+import 'package:reciclame/localization/language_constants.dart';
 
 
 class HistoryDataView extends StatefulWidget {
@@ -26,6 +26,8 @@ class _HistoryDataViewState extends State<HistoryDataView> {
   }
 
   AspectRatio _getPieChart() {
+
+    String paper = getTranslated(context, 'paper');
     return AspectRatio(
         aspectRatio: 1.3,
         child: Card(
@@ -66,7 +68,7 @@ class _HistoryDataViewState extends State<HistoryDataView> {
                 children: const <Widget>[
                   Indicator(
                     color: Color(0xff0293ee),
-                    text: 'Paper',
+                    text: 'paper',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -74,7 +76,7 @@ class _HistoryDataViewState extends State<HistoryDataView> {
                   ),
                   Indicator(
                     color: Colors.brown,
-                    text: 'Organic',
+                    text: 'organic',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -82,7 +84,7 @@ class _HistoryDataViewState extends State<HistoryDataView> {
                   ),
                   Indicator(
                     color: Color(0xFFFDD835),
-                    text: 'Plastic',
+                    text: 'plastic',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -90,7 +92,7 @@ class _HistoryDataViewState extends State<HistoryDataView> {
                   ),
                   Indicator(
                     color: Color(0xff13d38e),
-                    text: 'Glass',
+                    text: 'glass',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -98,7 +100,7 @@ class _HistoryDataViewState extends State<HistoryDataView> {
                   ),
                   Indicator(
                     color: Colors.grey,
-                    text: 'Non-recyclable',
+                    text: 'non-recyclable',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -138,8 +140,7 @@ class _HistoryDataViewState extends State<HistoryDataView> {
                       const SizedBox(
                         height: 15,
                       ),
-                      const Text(
-                        'History',
+                      Text(getTranslated(context, 'history'),
                         style: TextStyle(
                           color: Color(0xff827daa),
                           fontSize: 16,
@@ -149,8 +150,8 @@ class _HistoryDataViewState extends State<HistoryDataView> {
                       const SizedBox(
                         height: 4,
                       ),
-                      const Text(
-                        'Monthly recycling',
+                      Text(
+                        getTranslated(context, 'monthly_recycling'),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
@@ -471,7 +472,7 @@ class Indicator extends StatelessWidget {
           width: 4,
         ),
         Text(
-          text,
+          getTranslated(context, text),
           style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: textColor),
         )
       ],

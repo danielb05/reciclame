@@ -27,5 +27,8 @@
   "non-recyclable": "Desechos generales",
   "glass": "Vidrio",
   "paper": "Papel",
-  "organic": "Orgánico"
+  "organic": "Orgánico",
+  "monthly_recycling": "Reciclaje Mensual",
+  "history": "Historial"
+
 }

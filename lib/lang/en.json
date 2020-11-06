@@ -27,5 +27,7 @@
   "non-recyclable": "Non Recyclable",
   "glass": "Glass",
   "paper": "Paper",
-  "organic": "Organic"
+  "organic": "Organic",
+  "monthly_recycling": "Monthly Recycling",
+  "history": "History"
 }
