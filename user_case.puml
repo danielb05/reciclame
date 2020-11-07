@@ -8,7 +8,7 @@ rectangle Service <<Web Service>>{
 rectangle Reciclame <<App>> {
   usecase "Locate recycling bins" as UC1
   usecase "Scan items using barcode reader" as UC2
-  usecase "Classify containers" as UC3
+  usecase "Classify products" as UC3
   usecase "Check the news about environment and recycling" as UC4
   usecase "Change the application's language" as UC5
   usecase "Change the user location" as UC6
@@ -25,7 +25,6 @@ fc --> UC6
 
 UC1 --> UC7 :<<include>>
 UC2 --> UC7 :<<include>>
-UC3 --> UC7 :<<include>>
 UC4 --> UC7 :<<include>>
 UC5 --> UC7 :<<include>>
 UC6 --> UC7 :<<include>>
