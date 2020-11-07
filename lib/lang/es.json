@@ -23,12 +23,15 @@
   "password_not_match":"Las contraseñas no coinciden!",
   "thanks_sign_up": "Gracias por registrarte!",
   "welcome": "Bienvenido ",
-  "plastic": "Plastico",
+  "plastic": "Plástico",
+  "yellow_bin": "Plástico y envases metálicos",
   "non-recyclable": "Desechos generales",
   "glass": "Vidrio",
+  "glass_bin": "Envases de vidrio",
   "paper": "Papel",
   "organic": "Orgánico",
   "monthly_recycling": "Reciclaje Mensual",
-  "history": "Historial"
+  "history": "Historial",
+  "aluminium": "Aluminio"
 
 }

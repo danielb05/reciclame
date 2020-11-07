@@ -24,10 +24,13 @@
   "thanks_sign_up": "Thanks for signing up!",
   "welcome": "Welcome to our application dear ",
   "plastic": "Plastic",
+  "yellow_bin": "Yellow Bin - Light packaging",
   "non-recyclable": "Non Recyclable",
   "glass": "Glass",
+  "glass_bin": "Green Bin",
   "paper": "Paper",
   "organic": "Organic",
   "monthly_recycling": "Monthly Recycling",
-  "history": "History"
+  "history": "History",
+  "aluminium": "Aluminium"
 }

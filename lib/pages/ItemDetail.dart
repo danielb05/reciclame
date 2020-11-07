@@ -24,18 +24,18 @@ class _ItemDetailState extends State<ItemDetail> {
 
     switch (widget.arguments['item']){
       case 'Coke Can':
-        _bins='Yellow Bin - Light packaging';
-        _material='Aluminium';
+        _bins='yellow_bin';
+        _material='aluminium';
         _bin_color=Colors.yellow;
         break;
       case 'Coke Glass Bottle':
-        _bins='Green Bin';
-        _material='Glass';
+        _bins='glass_bin';
+        _material='glass';
         _bin_color=Colors.green;
         break;
       case 'Coke PET Bottle':
-        _bins='Yellow Bin - Light packaging';
-        _material='Plastic';
+        _bins='yellow_bin';
+        _material='plastic';
         _bin_color=Colors.yellow;
         break;
     }
@@ -72,14 +72,14 @@ class _ItemDetailState extends State<ItemDetail> {
             Container(
               margin: EdgeInsets.all(20),
                       child: Chip(
-                        label: Text(material),
+                        label: Text(getTranslated(context, material)),
                         backgroundColor: bin_color,
                       ),
                     ),
             SizedBox(height: 10.0),
             Container(
               child: Chip(
-                label: Text(bins),
+                label: Text(getTranslated(context, bins)),
                 backgroundColor: bin_color,
               ),
             ),
