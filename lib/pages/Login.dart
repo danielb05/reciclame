@@ -99,10 +99,7 @@ class _LoginState extends State<Login> {
 
   _login() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: "reciclame.udl@gmail.com",
-          password: "password"
-      );
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -193,13 +190,13 @@ class _LoginState extends State<Login> {
         elevation: 5.0,
         onPressed: (){
           _formKey.currentState.save();
-
           FutureBuilder(
             future: _login() ,
               builder: (context, snapshot){
                 print('In Builder');
               }
           );
+          Navigator.pushReplacementNamed(context, '/home');
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

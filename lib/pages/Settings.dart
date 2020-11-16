@@ -49,7 +49,12 @@ class _SettingsState extends State<Settings> {
           )
         : RaisedButton(
             onPressed: () {
-              _logout();
+              FutureBuilder(
+                  future: _logout() ,
+                  builder: (context, snapshot){
+                    print('In Builder');
+                  }
+              );
               Navigator.pop(context);
               Navigator.pushReplacementNamed(context, '/home');
             },
