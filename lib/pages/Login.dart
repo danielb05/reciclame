@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/pages/SignUp.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 
 class Login extends StatefulWidget {
@@ -19,6 +19,10 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
+    FirebaseAuth auth = FirebaseAuth.instance;
+    if (auth.currentUser != null) {
+      print(auth.currentUser.uid);
+    }
   }
 
   @override
@@ -93,14 +97,19 @@ class _LoginState extends State<Login> {
 
   // Methods
 
-  void storageUser(email) async {
-    // Storage
-    SharedPreferences storage = await SharedPreferences.getInstance();
-    storage.setString('email',email);
-    storage.setString('fullname',"Maria Moon Green");
-    storage.setString('location',"Spain");
-    storage.setInt('level',3);
-    storage.setBool('isLogged', true);
+  _login() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: "reciclame.udl@gmail.com",
+          password: "password"
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
   }
 
 
@@ -184,14 +193,13 @@ class _LoginState extends State<Login> {
         elevation: 5.0,
         onPressed: (){
           _formKey.currentState.save();
-          print("User logged: "+email);
-          if(email=='admin' && password =='password'){
-            storageUser(email);
-            Navigator.of(context).popUntil((route) => route.settings.name == "/home");
-            Navigator.pushReplacementNamed(context, '/home');
-          }else{
-            //return SnackBar(content: Text('Wrong user or password!'));
-          }
+
+          FutureBuilder(
+            future: _login() ,
+              builder: (context, snapshot){
+                print('In Builder');
+              }
+          );
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

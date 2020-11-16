@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "155470317648",
-    "firebase_url": "https://reciclame-b6692.firebaseio.com",
-    "project_id": "reciclame-b6692",
-    "storage_bucket": "reciclame-b6692.appspot.com"
+    "project_number": "293535846004",
+    "firebase_url": "https://reciclame-app-b1f20.firebaseio.com",
+    "project_id": "reciclame-app-b1f20",
+    "storage_bucket": "reciclame-app-b1f20.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:155470317648:android:c89f5567ebb236e0e4a955",
+        "mobilesdk_app_id": "1:293535846004:android:a3a7ccaf4d577bb8f30b21",
         "android_client_info": {
           "package_name": "com.example.reciclame"
         }
       },
       "oauth_client": [
         {
-          "client_id": "155470317648-68gb9uh82gd1la5vk71dfvd86rbrmfk4.apps.googleusercontent.com",
+          "client_id": "293535846004-fkmco8dghv5ugt7ducnmrsd85cms0kjc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBm-mPhone5xpYAzS_19eHFZnBsj99zrhY"
+          "current_key": "AIzaSyDFat3hO0shI6IeGOUHCbOAKMCCp-EYx9k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "155470317648-68gb9uh82gd1la5vk71dfvd86rbrmfk4.apps.googleusercontent.com",
+              "client_id": "293535846004-fkmco8dghv5ugt7ducnmrsd85cms0kjc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -9,8 +9,11 @@ import 'package:reciclame/pages/SignUp.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localization/demo_localization.dart';
 import 'localization/language_constants.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
