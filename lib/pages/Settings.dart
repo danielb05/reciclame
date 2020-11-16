@@ -67,7 +67,8 @@ class _SettingsState extends State<Settings> {
         : RaisedButton(
             onPressed: () {
               _removeCredentials();
-              Navigator.pushNamed(context, '/home');
+              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, '/home');
             },
             color: Colors.redAccent,
             child: Text(getTranslated(context, 'close_session')));

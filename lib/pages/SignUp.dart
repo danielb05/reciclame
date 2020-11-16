@@ -31,6 +31,7 @@ class _SignUp extends State<SignUp> {
         child: Text("OK"),
         onPressed: () {
           Navigator.of(context).pop();
+          Navigator.of(context).pop();
           Navigator.pushReplacementNamed(context, '/login');
         },
       );
