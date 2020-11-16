@@ -5,7 +5,7 @@ import 'package:reciclame/pages/ItemDetail.dart';
 import 'package:reciclame/pages/Login.dart';
 import 'package:reciclame/pages/Opening.dart';
 import 'package:reciclame/pages/Settings.dart';
-import 'package:reciclame/pages/SignUp.dart';
+import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/SignUp/SignUp.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localization/demo_localization.dart';
 import 'localization/language_constants.dart';

@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reciclame/localization/language_constants.dart';
-import 'package:reciclame/pages/SignUp.dart';
+import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/SignUp/SignUp.dart';
 import '../constants.dart';
 
 class Login extends StatefulWidget {
