@@ -53,14 +53,16 @@ class _FormSignUpState extends State<FormSignUp>{
       );
 
       CollectionReference userData = FirebaseFirestore.instance.collection('userData');
-      var user = new CustomUser(userCredential.user.uid,false,fullName,"default",city,postalCode,0,true);
+      var user = new CustomUser(userCredential.user.uid,false,fullName,"default",postalCode,city,0,true);
       userData.add(user.toJson()).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));
+
+      Navigator.pushReplacementNamed(context, '/login');
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text('The account already exists for that email.'),backgroundColor: Colors.red,));
       }
     } catch (e) {
       print(e);
@@ -102,12 +104,11 @@ class _FormSignUpState extends State<FormSignUp>{
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
                   FutureBuilder(
-                      future: _signUp() ,
+                      future: _signUp(),
                       builder: (context, snapshot){
                         print('In Builder');
                       }
                   );
-                  Navigator.pushReplacementNamed(context, '/login');
                 }
               },
             ),
