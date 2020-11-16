@@ -187,7 +187,8 @@ class _LoginState extends State<Login> {
           print("User logged: "+email);
           if(email=='admin' && password =='password'){
             storageUser(email);
-            Navigator.pushNamed(context, '/home');
+            Navigator.of(context).popUntil((route) => route.settings.name == "/home");
+            Navigator.pushReplacementNamed(context, '/home');
           }else{
             //return SnackBar(content: Text('Wrong user or password!'));
           }

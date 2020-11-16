@@ -86,7 +86,10 @@ class _ItemDetailState extends State<ItemDetail> {
             SizedBox(height: 100),
             RaisedButton.icon(
                 color: kPrimaryColor,
-                onPressed: ()=>Navigator.pushNamed(context, '/home'),
+                onPressed: (){
+                  Navigator.pop(context);
+                  Navigator.pushReplacementNamed(context, '/home');
+                },
                 label: Text(getTranslated(context, 'title').toUpperCase()),
                 icon: Icon(Icons.restore_from_trash),
             )
