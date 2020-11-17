@@ -12,6 +12,7 @@ class BinLocatorView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Maps',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
