@@ -34,6 +34,8 @@ class _SettingsState extends State<Settings> {
 
   _logout() async {
     await FirebaseAuth.instance.signOut();
+    Navigator.pop(context);
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   RaisedButton sessionButton() {
@@ -52,11 +54,9 @@ class _SettingsState extends State<Settings> {
               FutureBuilder(
                   future: _logout() ,
                   builder: (context, snapshot){
-                    print('In Builder');
+                    print('Close Session');
                   }
               );
-              Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, '/home');
             },
             color: Colors.redAccent,
             child: Text(getTranslated(context, 'close_session')));
@@ -71,7 +71,7 @@ class _SettingsState extends State<Settings> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              AccountWidget(fullname: fullname, email: email, level: level, location: location, isLogged: (isLogged ?? false)),
+              AccountWidget(isLogged: (isLogged ?? false)),
               Spacer(),
               Divider(color: kTextColor),
               Padding(

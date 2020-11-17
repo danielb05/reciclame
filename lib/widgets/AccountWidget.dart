@@ -5,19 +5,7 @@ import '../constants.dart';
 import '../main.dart';
 
 class AccountWidget extends StatefulWidget {
-  const AccountWidget({
-    Key key,
-    @required this.fullname,
-    @required this.email,
-    @required this.level,
-    @required this.location,
-    @required this.isLogged
-  }) : super(key: key);
-
-  final String fullname;
-  final String email;
-  final int level;
-  final String location;
+  const AccountWidget({Key key, @required this.isLogged}) : super(key: key);
   final isLogged;
 
   @override
@@ -71,7 +59,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 10.0),
-              Text('${widget.fullname}',
+              Text('',
                   style:
                   TextStyle(color: Colors.black, letterSpacing: 2.0)),
               SizedBox(height: 20.0),
@@ -82,7 +70,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 10.0),
-              Text('${widget.email}',
+              Text('',
                   style:
                   TextStyle(color: Colors.black, letterSpacing: 2.0)),
               SizedBox(height: 20.0),
@@ -93,7 +81,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 10.0),
-              Text('${widget.level}',
+              Text('',
                   style:
                   TextStyle(color: Colors.black, letterSpacing: 2.0)),
               SizedBox(height: 20.0),
@@ -104,7 +92,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 10.0),
-              Text('${widget.location}',
+              Text('',
                   style:
                   TextStyle(color: Colors.black, letterSpacing: 2.0)),
               SizedBox(height: 20.0),
