@@ -24,6 +24,13 @@ class _SettingsState extends State<Settings> {
     _isLogged();
   }
 
+  @override
+  void setState(fn) {
+    if(mounted) {
+      super.setState(fn);
+    }
+  }
+
   _isLogged(){
     FirebaseAuth.instance.authStateChanges().listen((User user) {
       setState(() {
