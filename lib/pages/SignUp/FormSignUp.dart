@@ -62,7 +62,7 @@ class _FormSignUpState extends State<FormSignUp>{
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text('The account already exists for that email.'),backgroundColor: Colors.red,));
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text('The account already exists for that email.'),backgroundColor: Colors.red));
       }
     } catch (e) {
       print(e);

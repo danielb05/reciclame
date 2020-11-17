@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/pages/Home.dart';
 import 'package:reciclame/pages/ItemDetail.dart';
-import 'package:reciclame/pages/Login.dart';
+import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/Login/Login.dart';
 import 'package:reciclame/pages/Opening.dart';
 import 'package:reciclame/pages/Settings.dart';
 import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/SignUp/SignUp.dart';

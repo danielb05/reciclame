@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/widgets/AccountWidget.dart';
@@ -12,11 +13,11 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsState extends State<SettingsView> {
-  bool isLogged = false;
-  String  email = "-";
-  String fullname = "Anonymous";
-  int level = 1;
-  String location = "";
+  bool isLogged;
+  String  email;
+  String fullname;
+  int level;
+  String location;
   var language = {'en_US': 'English'};
 
   @override
@@ -37,22 +38,15 @@ class _SettingsState extends State<SettingsView> {
   }
 
   _initCredentials() async {
-    isLogged = false;
     email = "-";
     fullname = "Anonymous";
     level = 1;
     location = 'Undefined';
   }
 
-  _removeCredentials() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _initCredentials();
-      prefs.remove('email');
-      prefs.remove('fullname');
-      prefs.remove('level');
-      prefs.remove('location');
-    });
+  _logout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   RaisedButton sessionButton() {
@@ -67,8 +61,11 @@ class _SettingsState extends State<SettingsView> {
           )
         : RaisedButton(
             onPressed: () {
-              _removeCredentials();
-              //Navigator.pushNamed(context, '/home');
+              FutureBuilder(
+                  future: _logout(),
+                  builder: (context, snapshot){
+                    print('In Builder');
+                  });
             },
             color: Colors.redAccent,
             child: Text(getTranslated(context, 'close_session')));
@@ -81,7 +78,7 @@ class _SettingsState extends State<SettingsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            AccountWidget(fullname: fullname, email: email, level: level, location: location,isLogged: isLogged),
+            AccountWidget(fullname: fullname, email: email, level: level, location: location,isLogged: isLogged??false),
             Spacer(),
             Divider(color: kTextColor),
             Padding(

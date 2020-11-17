@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'FormLogin.dart';
 import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/SignUp/SignUp.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -27,71 +28,50 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFFb7e4c7),
-                      Color(0xFF52b788),
-                      Color(0xFF40916c),
-                      Color(0xFF2d6a4f),
-                    ],
-                    stops: [0.1, 0.4, 0.7, 0.9],
-                  ),
-                ),
-              ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 120.0,
-                  ),
-                  child:Form(
-                    key: _formKey,
-                    child: Column(
+      return Scaffold(
+        appBar: AppBar(),
+        body:SafeArea(
+          child: SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.all(30.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 15),
+                    Text("Bienvenido",style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold
+                    ),
+                    ),
+                    SizedBox(height: 40),
+                    FormLogin(),
+                    SizedBox(height: 15),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                      children: [
                         Text(
-                          getTranslated(context, 'sign_in'),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'OpenSans',
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
+                          "¿Aún no tienes una cuenta? ",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        GestureDetector(
+                          onTap: () => Navigator.pushNamed(context,'/signup'),
+                          child: Text(
+                            "Regístrate",
+                            style: TextStyle(
+                                fontSize: 18.0,
+                                color: kPrimaryColor),
                           ),
                         ),
-                        SizedBox(height: 30.0),
-                        _buildEmailTF(),
-                        SizedBox(
-                          height: 30.0,
-                        ),
-                        _buildPasswordTF(),
-
-                        _buildLoginBtn(),
-                        _buildSignupBtn(),
                       ],
-                    ),
-                  )
+                    )
+                  ],
                 ),
-              )
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
+        )
     );
   }
 
@@ -100,11 +80,12 @@ class _LoginState extends State<Login> {
   _login() async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushReplacementNamed(context, '/home');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text('Wrong password provided for that user.'),backgroundColor: Colors.red));
       }
     }
   }
@@ -182,6 +163,7 @@ class _LoginState extends State<Login> {
       ],
     );
   }
+
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -196,7 +178,6 @@ class _LoginState extends State<Login> {
                 print('In Builder');
               }
           );
-          Navigator.pushReplacementNamed(context, '/home');
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -216,6 +197,7 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
   Widget _buildSignupBtn() {
     return GestureDetector(
       onTap:(){
