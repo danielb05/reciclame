@@ -34,7 +34,6 @@ class _AccountWidgetState extends State<AccountWidget> {
     super.initState();
   }
 
-  //TODO: Get User information or set default.
 
   @override
   Widget build(BuildContext context) {
