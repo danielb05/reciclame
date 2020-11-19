@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/components/FormError.dart';
+import 'package:reciclame/services/authService.dart';
 import '../../constants.dart';
 
 class FormLogin extends StatefulWidget {
@@ -32,20 +33,20 @@ class _FormLoginState extends State<FormLogin> {
   }
 
   _login() async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
-      Navigator.pop(context);
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text('Wrong email or password provided.',textAlign: TextAlign.center),backgroundColor: Colors.red));
-      }
-    }
+   switch (await AuthService.instance.login(email, password)){
+     case "successful":
+       Navigator.pop(context);
+       Navigator.pop(context);
+       break;
+     case 'user-not-found':
+       print('No user found for that email.');
+       break;
+     case  "wrong-password":
+       Scaffold.of(context).showSnackBar(SnackBar(content: Text('Wrong email or password provided.',textAlign: TextAlign.center),backgroundColor: Colors.red));
+       break;
+     default:
+       Scaffold.of(context).showSnackBar(SnackBar(content: Text('Something is wrong!',textAlign: TextAlign.center),backgroundColor: Colors.red));
+   }
   }
 
   @override

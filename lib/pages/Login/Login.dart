@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:reciclame/localization/language_constants.dart';
 
 import '../../constants.dart';
 import 'FormLogin.dart';
@@ -11,10 +10,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
-  String email = '';
-  String password = '';
-
   @override
   void initState() {
     super.initState();
