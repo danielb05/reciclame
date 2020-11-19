@@ -16,9 +16,7 @@ class AuthService {
   }
 
   isLogged(){
-    FirebaseAuth.instance.authStateChanges().listen((User user) {
-        return !(user == null ?? false);
-    });
+    return !(FirebaseAuth.instance.currentUser == null ?? false);
   }
 
 

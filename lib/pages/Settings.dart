@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/services/authService.dart';
 import 'package:reciclame/widgets/AccountWidget.dart';
 import '../constants.dart';
 
@@ -21,7 +22,10 @@ class _SettingsState extends State<Settings> {
   @override
   void initState() {
     super.initState();
-    _isLogged();
+
+    setState(() {
+      isLogged = AuthService.instance.isLogged();
+    });
   }
 
   @override
@@ -31,16 +35,8 @@ class _SettingsState extends State<Settings> {
     }
   }
 
-  _isLogged(){
-    FirebaseAuth.instance.authStateChanges().listen((User user) {
-      setState(() {
-        isLogged = !(user == null ?? false);
-      });
-    });
-  }
-
   _logout() async {
-    await FirebaseAuth.instance.signOut();
+    await AuthService.instance.logout();
     Navigator.pop(context);
     Navigator.pushReplacementNamed(context, '/home');
   }
