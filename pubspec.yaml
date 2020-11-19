@@ -31,6 +31,7 @@ dependencies:
   rxdart: ^0.23.0
   location: ^3.0.0
   google_maps_flutter: ^0.5.24+1
+  provider: ^4.3.2+2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -64,6 +65,7 @@ flutter:
     - assets/Coke Can.jpg
     - assets/Coke Glass Bottle.jpg
     - assets/Coke PET Bottle.jpg
+    - assets/news.png
     - lib/lang/en.json
     - lib/lang/es.json
 
