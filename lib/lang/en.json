@@ -34,10 +34,14 @@
   "history": "History",
   "aluminium": "Aluminium",
   "continue": "Continue",
-  "kEmailNullError": "Por favor introduzca su email",
-  "kInvalidEmailError": "Por favor introduzca un email valido",
-  "kPassNullError":"Por favor introduzca su contraseña",
-  "kShortPassError" : "Contraseña muy corta",
-  "kNullError": "Valor/es vacio/s."
+  "kEmailNullError": "Please enter your email.",
+  "kInvalidEmailError": "Please enter valid email.",
+  "kPassNullError":"Please enter your password.",
+  "kShortPassError" : "Short password.",
+  "kNullError": "Empty field/s.",
+  "smth_wrong": "Something is wrong!",
+  "wrong_e_p": "Email o cotraseña incorrecta!"
+
+
 
 }

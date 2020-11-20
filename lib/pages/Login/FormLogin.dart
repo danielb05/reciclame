@@ -43,10 +43,10 @@ class _FormLoginState extends State<FormLogin> {
        print('No user found for that email.');
        break;
      case  "wrong-password":
-       Scaffold.of(context).showSnackBar(SnackBar(content: Text('Wrong email or password provided.',textAlign: TextAlign.center),backgroundColor: Colors.red));
+       Scaffold.of(context).showSnackBar(SnackBar(content: Text(getTranslated(context, 'wrong_e_p'),textAlign: TextAlign.center),backgroundColor: Colors.red));
        break;
      default:
-       Scaffold.of(context).showSnackBar(SnackBar(content: Text('Something is wrong!',textAlign: TextAlign.center),backgroundColor: Colors.red));
+       Scaffold.of(context).showSnackBar(SnackBar(content: Text(getTranslated(context, 'smth_wrong'),textAlign: TextAlign.center),backgroundColor: Colors.red));
    }
   }
 
