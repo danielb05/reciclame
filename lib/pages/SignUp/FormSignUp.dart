@@ -94,7 +94,7 @@ class _FormSignUpState extends State<FormSignUp>{
             child: FlatButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               color: kPrimaryColor,
-              child: Text('Continue',
+              child: Text(getTranslated(context, 'continue'),
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors.white
@@ -119,13 +119,13 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => fullName = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNullError);
+          removeError(error: getTranslated(context, 'kNullError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNullError);
+          addError(error: getTranslated(context, 'kNullError'));
           return "";
         }
         return null;
@@ -145,13 +145,13 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => postalCode = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNullError);
+          removeError(error: getTranslated(context, 'kNullError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNullError);
+          addError(error: getTranslated(context, 'kNullError'));
           return "";
         }
         return null;
@@ -171,13 +171,13 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => city = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNullError);
+          removeError(error: getTranslated(context, 'kNullError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNullError);
+          addError(error: getTranslated(context, 'kNullError'));
           return "";
         }
         return null;
@@ -197,25 +197,25 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+          removeError(error: getTranslated(context, 'kEmailNullError'));
         } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          removeError(error: getTranslated(context, 'kInvalidEmailError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kEmailNullError);
+          addError(error: getTranslated(context, 'kEmailNullError'));
           return "";
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
+          addError(error: getTranslated(context, 'kInvalidEmailError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Email",
-        hintText: "Introduzca su email",
+        labelText: getTranslated(context, 'email'),
+        hintText: getTranslated(context, 'enter_email'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Icon(Icons.alternate_email,color: kPrimaryColor),
       ),
@@ -228,25 +228,25 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+          removeError(error: getTranslated(context, 'kPassNullError'));
         } else if (value.length >= 8) {
-          removeError(error: kShortPassError);
+          removeError(error: getTranslated(context, 'kShortPassError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPassNullError);
+          addError(error: getTranslated(context, 'kPassNullError'));
           return "";
         } else if (value.length < 8) {
-          addError(error: kShortPassError);
+          addError(error: getTranslated(context, 'kShortPassError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
         labelText: getTranslated(context, "password"),
-        hintText: "Introduzca su contraseña",
+        hintText: getTranslated(context,"enter_password"),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Icon(Icons.lock_outline_rounded,color: kPrimaryColor),
       ),

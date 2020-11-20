@@ -32,5 +32,12 @@
   "organic": "Organic",
   "monthly_recycling": "Monthly Recycling",
   "history": "History",
-  "aluminium": "Aluminium"
+  "aluminium": "Aluminium",
+  "continue": "Continue",
+  "kEmailNullError": "Por favor introduzca su email",
+  "kInvalidEmailError": "Por favor introduzca un email valido",
+  "kPassNullError":"Por favor introduzca su contraseña",
+  "kShortPassError" : "Contraseña muy corta",
+  "kNullError": "Valor/es vacio/s."
+
 }

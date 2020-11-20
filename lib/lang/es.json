@@ -33,5 +33,11 @@
   "monthly_recycling": "Reciclaje Mensual",
   "history": "Historial",
   "aluminium": "Aluminio",
+  "continue": "Continuar",
+  "kEmailNullError": "Please enter your email.",
+  "kInvalidEmailError": "Please enter valid email.",
+  "kPassNullError":"Please enter your password.",
+  "kShortPassError" : "Short password.",
+  "kNullError": "Empty field/s."
 
 }

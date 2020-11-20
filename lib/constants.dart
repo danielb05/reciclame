@@ -20,12 +20,6 @@ final kLabelStyle = TextStyle(
 
 //Validators
 final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-const String kEmailNullError = "Por favor introduzca su email";
-const String kNullError = "Valor vacio.";
-const String kInvalidEmailError = "Por favor introduzca un email valido";
-const String kPassNullError = "Por favor introduzca su contraseña";
-const String kShortPassError = "Contraseña muy corta";
-const String kMatchPassError = "La contraseña no coincide";
 
 final kBoxDecorationStyle = BoxDecoration(
   color: Color(0xFFd8f3dc),

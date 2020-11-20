@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/components/FormError.dart';
+import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/services/authService.dart';
 
 import '../../constants.dart';
@@ -67,7 +68,7 @@ class _FormLoginState extends State<FormLogin> {
             child: FlatButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               color: kPrimaryColor,
-              child: Text('Continuar',
+              child: Text(getTranslated(context, 'continue'),
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors.white
@@ -92,20 +93,20 @@ class _FormLoginState extends State<FormLogin> {
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+          removeError(error: getTranslated(context, 'kPassNullError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPassNullError);
+          addError(error: getTranslated(context, 'kPassNullError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Contraseña",
-        hintText: "Introduzca su contraseña",
+        labelText: getTranslated(context,'password'),
+        hintText: getTranslated(context, 'enter_password'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Icon(Icons.lock_outline_rounded,color: kPrimaryColor),
       ),
@@ -118,25 +119,25 @@ class _FormLoginState extends State<FormLogin> {
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+          removeError(error: getTranslated(context, 'kEmailNullError'));
         } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          removeError(error: getTranslated(context, 'kInvalidEmailError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kEmailNullError);
+          addError(error: getTranslated(context, 'kEmailNullError'));
           return "";
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
+          addError(error: getTranslated(context, 'kInvalidEmailError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Email",
-        hintText: "Introduzca su email",
+        labelText: getTranslated(context,'email'),
+        hintText: getTranslated(context, 'enter_email'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Icon(Icons.alternate_email,color: kPrimaryColor),
       ),
