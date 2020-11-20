@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/components/FormError.dart';
 import 'package:reciclame/services/authService.dart';
+
 import '../../constants.dart';
 
 class FormLogin extends StatefulWidget {
@@ -73,15 +73,10 @@ class _FormLoginState extends State<FormLogin> {
                       color: Colors.white
                   )
               ),
-              onPressed:() {
+              onPressed:() async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-                  FutureBuilder(
-                      future: _login(),
-                      builder: (context, snapshot){
-                        print('In Builder');
-                      }
-                  );
+                  await _login();
                 }
               },
             ),

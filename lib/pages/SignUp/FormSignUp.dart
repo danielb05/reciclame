@@ -100,15 +100,10 @@ class _FormSignUpState extends State<FormSignUp>{
                       color: Colors.white
                   )
               ),
-              onPressed:() {
+              onPressed:() async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-                  FutureBuilder(
-                      future: _signUp(),
-                      builder: (context, snapshot){
-                        print('In Builder');
-                      }
-                  );
+                  await _signUp();
                 }
               },
             ),

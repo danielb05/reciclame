@@ -53,13 +53,8 @@ class _SettingsState extends State<Settings> {
             color: kPrimaryColor,
           )
         : RaisedButton(
-            onPressed: () {
-              FutureBuilder(
-                  future: _logout() ,
-                  builder: (context, snapshot){
-                    print('Close Session');
-                  }
-              );
+            onPressed: () async {
+              await _logout();
             },
             color: Colors.redAccent,
             child: Text(getTranslated(context, 'close_session')));
