@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/services/authService.dart';
 
 import '../constants.dart';
 import '../main.dart';
@@ -13,6 +14,8 @@ class AccountWidget extends StatefulWidget {
 }
 
 class _AccountWidgetState extends State<AccountWidget> {
+
+  Map<String,dynamic> user;
 
   void _changeLanguage(String languageCode) async {
     Locale _locale = await setLocale(languageCode);
@@ -31,7 +34,17 @@ class _AccountWidgetState extends State<AccountWidget> {
     setState(() {
       dropdownValue = _getLanguageCode();
     });
+
+    AuthService.instance.getCredentials().then((value){
+      setState(() {
+        this.user = value;
+      });
+    });
+
     super.initState();
+  }
+  Text _getText(String keyword,aux){
+    return Text(user != null ?user[keyword].toString():aux.toString(), style: TextStyle(color: Colors.black, letterSpacing: 2.0));
   }
 
 
@@ -60,9 +73,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 10.0),
-              Text('',
-                  style:
-                  TextStyle(color: Colors.black, letterSpacing: 2.0)),
+              _getText('fullName','Anonymous'),
               SizedBox(height: 20.0),
               Text(getTranslated(context, 'email').toUpperCase(),
                   style: TextStyle(
@@ -71,9 +82,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 10.0),
-              Text('',
-                  style:
-                  TextStyle(color: Colors.black, letterSpacing: 2.0)),
+              _getText('email','-'),
               SizedBox(height: 20.0),
               Text(getTranslated(context, 'level').toUpperCase(),
                   style: TextStyle(
@@ -82,9 +91,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 10.0),
-              Text('',
-                  style:
-                  TextStyle(color: Colors.black, letterSpacing: 2.0)),
+              _getText('score', 0),
               SizedBox(height: 20.0),
               Text(getTranslated(context, 'location').toUpperCase(),
                   style: TextStyle(
@@ -93,9 +100,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold)),
               SizedBox(height: 10.0),
-              Text('',
-                  style:
-                  TextStyle(color: Colors.black, letterSpacing: 2.0)),
+              _getText('city', 'Undefined'),
               SizedBox(height: 20.0),
               Text(getTranslated(context, 'language').toUpperCase(),
                   style: TextStyle(

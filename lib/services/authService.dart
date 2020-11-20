@@ -13,8 +13,11 @@ class AuthService {
 
   login(String email, String password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-      var userData = await UserService.instance.getCurrentUserData(userCredential.user.uid);
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      var userData = await UserService.instance
+          .getCurrentUserData(userCredential.user.uid);
+      userData['email'] = userCredential.user.email;
       setCredentials(userData);
       return "successful";
     } on FirebaseAuthException catch (e) {
@@ -29,8 +32,9 @@ class AuthService {
 
   getCredentials() async {
     final prefs = await SharedPreferences.getInstance();
-    Map<String, dynamic> user  = jsonDecode(prefs.getString('currentUser'));
-    return user;
+    return prefs.getString('currentUser') != null
+        ? jsonDecode(prefs.getString('currentUser'))
+        : null;
   }
 
   removeCredentials() async {
