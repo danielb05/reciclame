@@ -6,6 +6,7 @@
   "es": "Spanish",
   "name": "Name",
   "full_name": "Full name",
+  "enter_fullname": "Enter your full name.",
   "username":"User name",
   "email": "Email",
   "level": "Level",
@@ -40,7 +41,12 @@
   "kShortPassError" : "Short password.",
   "kNullError": "Empty field/s.",
   "smth_wrong": "Something is wrong!",
-  "wrong_e_p": "Email o cotraseña incorrecta!"
+  "wrong_e_p": "Wrong email or password provided.",
+  "account_exist": "The account already exists for that email.",
+  "postalcode": "Postal Code",
+  "enter_postalcode": "Enter your postal code",
+  "city": "City",
+  "enter_city": "Enter your city"
 
 
 

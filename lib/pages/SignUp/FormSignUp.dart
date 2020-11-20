@@ -53,7 +53,7 @@ class _FormSignUpState extends State<FormSignUp>{
       );
 
       CollectionReference userData = FirebaseFirestore.instance.collection('userData');
-      var user = new CustomUser(userCredential.user.uid,false,fullName,"default",postalCode,city,0,true);
+      var user = new CustomUser(userCredential.user.uid,false,fullName,"default",city,postalCode,0,true);
       userData.add(user.toJson()).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));
 
       Navigator.pushReplacementNamed(context, '/login');
@@ -62,7 +62,7 @@ class _FormSignUpState extends State<FormSignUp>{
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text('The account already exists for that email.',textAlign: TextAlign.center),backgroundColor: Colors.red));
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text(getTranslated(context, 'account_exist'),textAlign: TextAlign.center),backgroundColor: Colors.red));
       }
     } catch (e) {
       print(e);
@@ -131,8 +131,8 @@ class _FormSignUpState extends State<FormSignUp>{
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Full Name",
-        hintText: "Introduzca su nombre y apellidos",
+        labelText: getTranslated(context, 'full_name'),
+        hintText: getTranslated(context, 'enter_fullname'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Icon(Icons.account_circle_rounded,color: kPrimaryColor),
       ),
@@ -157,8 +157,8 @@ class _FormSignUpState extends State<FormSignUp>{
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Postal Code",
-        hintText: "Introduzca su codigo postal",
+        labelText: getTranslated(context, 'postalcode'),
+        hintText: getTranslated(context, 'enter_postalcode'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Icon(Icons.pin_drop_sharp,color: kPrimaryColor),
       ),
@@ -183,8 +183,8 @@ class _FormSignUpState extends State<FormSignUp>{
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Ciudad",
-        hintText: "Introduzca su ciudad",
+        labelText: getTranslated(context, 'city'),
+        hintText: getTranslated(context, 'enter_city'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Icon(Icons.map_outlined,color: kPrimaryColor),
       ),
