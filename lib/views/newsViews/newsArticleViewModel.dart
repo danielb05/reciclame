@@ -17,4 +17,7 @@ class NewsArticleViewModel{
   String get url{
     return _newsArticle.url;
   }
+  String get content{
+    return _newsArticle.content;
+  }
 }

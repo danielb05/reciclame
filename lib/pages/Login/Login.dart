@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'FormLogin.dart';
-import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/SignUp/SignUp.dart';
+import 'package:reciclame/pages/SignUp/SignUp.dart';
 import '../../constants.dart';
 
 class Login extends StatefulWidget {

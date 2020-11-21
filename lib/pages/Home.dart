@@ -17,7 +17,7 @@ import 'package:flutter/material.dart'
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reciclame/localization/language_constants.dart';
-import 'file:///C:/Users/francesc/Desktop/reciclame/lib/views/newsViews/newsList.dart';
+import 'package:reciclame/views/newsViews/newsList.dart';
 import 'package:reciclame/views/BinLocatorView.dart';
 import 'package:reciclame/views/FindView.dart';
 import 'package:reciclame/views/HistoryDataView.dart';
