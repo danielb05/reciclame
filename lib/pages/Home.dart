@@ -65,7 +65,7 @@ class _HomeState extends State<Home> {
           Padding(padding: EdgeInsets.only(right: 20.0),
           child: GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, '/settings');
+              Navigator.pushNamed(context, '/settings',arguments: {'index':_selectedIndex});
             },
             child: Icon(Icons.settings,size: 22.0),
           ),)

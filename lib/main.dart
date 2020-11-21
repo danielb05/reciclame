@@ -96,7 +96,7 @@ class _MyAppState extends State<MyApp> {
           '/home': (context) => Home(),
           '/login': (context) => Login(),
           '/opening': (context) => Opening(),
-          '/settings': (context) => Settings(),
+          '/settings': (context) => Settings(ModalRoute.of(context).settings.arguments),
           '/signup': (context) => SignUp(),
           '/item': (context) => ItemDetail(ModalRoute.of(context).settings.arguments)
         },
