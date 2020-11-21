@@ -7,8 +7,8 @@ import 'newsArticleViewModel.dart';
 class NewsArticleListViewModel extends ChangeNotifier {
   List<NewsArticleViewModel> articles = List<NewsArticleViewModel>();
 
-  void populateTopHeadlines() async {
-    List<NewsArticle> newsArticles = await WebService().fetchTopHeadlines();
+  void populateTopHeadlines(context) async {
+    List<NewsArticle> newsArticles = await WebService().fetchTopHeadlines(context);
     this.articles = newsArticles
         .map((article) => NewsArticleViewModel(article: article))
         .toList();

@@ -27,7 +27,7 @@ class _NewsListState extends State<NewsList> {
   void initState() {
     super.initState();
     Provider.of<NewsArticleListViewModel>(context, listen: false)
-        .populateTopHeadlines();
+        .populateTopHeadlines(context);
   }
 
   @override
