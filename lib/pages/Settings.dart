@@ -1,8 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/services/authService.dart';
+import 'package:reciclame/services/containserService.dart';
 import 'package:reciclame/widgets/AccountWidget.dart';
+
 import '../constants.dart';
 
 class Settings extends StatefulWidget {
@@ -14,7 +15,7 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   bool isLogged;
-  String  email;
+  String email;
   String fullname;
   int level;
   String location;
@@ -30,7 +31,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   void setState(fn) {
-    if(mounted) {
+    if (mounted) {
       super.setState(fn);
     }
   }
@@ -42,14 +43,13 @@ class _SettingsState extends State<Settings> {
   }
 
   RaisedButton sessionButton() {
-
     return !(isLogged ?? false)
         ? RaisedButton(
             onPressed: () {
               Navigator.pushNamed(context, '/login');
             },
-            child:
-                Text(getTranslated(context, 'log_in'), style: TextStyle(color: kTextColor)),
+            child: Text(getTranslated(context, 'log_in'),
+                style: TextStyle(color: kTextColor)),
             color: kPrimaryColor,
           )
         : RaisedButton(
@@ -75,7 +75,8 @@ class _SettingsState extends State<Settings> {
               Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.bottomCenter, child: sessionButton()))
+                      alignment: Alignment.bottomCenter,
+                      child: sessionButton()))
             ],
           )),
     );

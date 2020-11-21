@@ -19,6 +19,7 @@ import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/views/BinLocatorView.dart';
 import 'package:reciclame/views/FindView.dart';
 import 'package:reciclame/views/HistoryDataView.dart';
+
 import '../constants.dart';
 
 class Home extends StatefulWidget {
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _widgetOptions = [
-      Text('Scan Object'),//Scan ObjectView
+      Text('Scan Object'), //Scan ObjectView
       BinLocatorView(), //LocationView
       FindView(),
       HistoryDataView(), //ListView
@@ -48,6 +49,7 @@ class _HomeState extends State<Home> {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,13 +57,15 @@ class _HomeState extends State<Home> {
         title: Text(getTranslated(context, 'title').toUpperCase()),
         centerTitle: true,
         actions: [
-          Padding(padding: EdgeInsets.only(right: 20.0),
-          child: GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(context, '/settings');
-            },
-            child: Icon(Icons.settings,size: 22.0),
-          ),)
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/settings');
+              },
+              child: Icon(Icons.settings, size: 22.0),
+            ),
+          )
         ],
       ),
       body: Center(

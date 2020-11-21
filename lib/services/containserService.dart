@@ -1,9 +1,4 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:reciclame/services/userService.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ContainerService {
   static final ContainerService instance = ContainerService._internal();
@@ -18,17 +13,22 @@ class ContainerService {
         .collection('container')
         .get();
 
+    List res = new List();
+
     snapshot.docs.forEach((doc) {
-
+      res.add(doc.data());
     });
+
+    return res;
   }
 
-  getById() async {
+  getByName(name) async {
+    var snapshot = await FirebaseFirestore.instance
+        .collection('container')
+        .where('name', isEqualTo: name)
+        .get();
 
-  }
-
-  getByName() async {
-
+    return (snapshot.docs[0].data());
   }
 
 }
