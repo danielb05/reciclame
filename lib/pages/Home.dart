@@ -15,10 +15,13 @@ import 'package:flutter/material.dart'
         Text,
         Widget;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/views/newsViews/newsList.dart';
 import 'package:reciclame/views/BinLocatorView.dart';
 import 'package:reciclame/views/FindView.dart';
 import 'package:reciclame/views/HistoryDataView.dart';
+import 'package:reciclame/views/newsViews/newsArticleListViewModel.dart';
 import '../constants.dart';
 
 class Home extends StatefulWidget {
@@ -29,13 +32,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 3;
   List<Widget> _widgetOptions;
 
   @override
   void initState() {
     super.initState();
     _widgetOptions = [
+      ChangeNotifierProvider(
+          create: (context) => NewsArticleListViewModel(),
+          child: NewsList()
+      ),
       Text('Scan Object'),//Scan ObjectView
       BinLocatorView(), //LocationView
       FindView(),
@@ -58,7 +65,7 @@ class _HomeState extends State<Home> {
           Padding(padding: EdgeInsets.only(right: 20.0),
           child: GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, '/settings');
+              Navigator.pushNamed(context, '/settings',arguments: {'index':_selectedIndex});
             },
             child: Icon(Icons.settings,size: 22.0),
           ),)
@@ -72,6 +79,7 @@ class _HomeState extends State<Home> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.new_releases_outlined), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),

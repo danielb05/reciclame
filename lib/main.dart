@@ -1,15 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/pages/Home.dart';
 import 'package:reciclame/pages/ItemDetail.dart';
-import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/Login/Login.dart';
+import 'package:reciclame/pages/Login/Login.dart';
 import 'package:reciclame/pages/Opening.dart';
 import 'package:reciclame/pages/Settings.dart';
-import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/SignUp/SignUp.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:reciclame/pages/SignUp/SignUp.dart';
+
+
+
 import 'localization/demo_localization.dart';
 import 'localization/language_constants.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,18 +21,17 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
     state.setLocale(newLocale);
   }
 
-  static String getLang(BuildContext context){
+  static String getLang(BuildContext context) {
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
     return state.getLang();
   }
 
-  static Locale getLocale(BuildContext context){
+  static Locale getLocale(BuildContext context) {
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>();
     return state.getLocate();
   }
@@ -39,7 +41,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   Locale _locale;
 
   setLocale(Locale locale) {
@@ -48,14 +49,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  getLocate(){
+  getLocate() {
     return _locale;
   }
 
-  getLang(){
+  getLang() {
     return _locale.toString();
   }
-
 
   @override
   void didChangeDependencies() {
@@ -66,7 +66,6 @@ class _MyAppState extends State<MyApp> {
     });
     super.didChangeDependencies();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -93,18 +92,18 @@ class _MyAppState extends State<MyApp> {
         },
         debugShowCheckedModeBanner: false,
         initialRoute: '/opening',
-        routes: {'/home': (context) => Home(),
-                  '/login': (context) => Login(),
-                  '/opening': (context) => Opening(),
-                  '/settings': (context) => Settings(),
-                  '/signup': (context) => SignUp(),
-                  '/item':(context)=> ItemDetail(ModalRoute.of(context).settings.arguments)
+        routes: {
+          '/home': (context) => Home(),
+          '/login': (context) => Login(),
+          '/opening': (context) => Opening(),
+          '/settings': (context) => Settings(ModalRoute.of(context).settings.arguments),
+          '/signup': (context) => SignUp(),
+          '/item': (context) => ItemDetail(ModalRoute.of(context).settings.arguments)
         },
         theme: ThemeData(
             scaffoldBackgroundColor: kBackgroundColor,
             primaryColor: kPrimaryColor,
             textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
-            visualDensity: VisualDensity.adaptivePlatformDensity)
-    );
+            visualDensity: VisualDensity.adaptivePlatformDensity));
   }
 }
