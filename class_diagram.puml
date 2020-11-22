@@ -68,9 +68,8 @@ class Property <<Property>>{
 }
 
 Product "1" -- "*" Material: contains >
-Product "*" -- "1" Container: has >
 Product "*" -- "*" Property: has >
-User "*" -- "1" Location: locate > 
+User "*" -- "1" Location: locate >
 Material "*" -- "1" Container: allows >
 Container"*" -- "1" Location: locate >
 @enduml
