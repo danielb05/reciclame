@@ -1,5 +1,5 @@
 {
-  "close_session":"Close session",
+  "close_session": "Close session",
   "title": "Reciclame",
   "log_in": "Log in",
   "en": "English",
@@ -7,7 +7,7 @@
   "name": "Name",
   "full_name": "Full name",
   "enter_fullname": "Enter your full name.",
-  "username":"User name",
+  "username": "User name",
   "email": "Email",
   "level": "Level",
   "location": "Location",
@@ -21,7 +21,7 @@
   "create_account": "Don't have an account yet? ",
   "phone_number": "Phone Number",
   "all_fields_required:": "All fields are mandatory!",
-  "password_not_match":"Passwords doesn't match!",
+  "password_not_match": "Passwords doesn't match!",
   "thanks_sign_up": "Thanks for signing up!",
   "welcome": "Welcome",
   "plastic": "Plastic",
@@ -37,8 +37,8 @@
   "continue": "Continue",
   "kEmailNullError": "Please enter your email.",
   "kInvalidEmailError": "Please enter valid email.",
-  "kPassNullError":"Please enter your password.",
-  "kShortPassError" : "Short password.",
+  "kPassNullError": "Please enter your password.",
+  "kShortPassError": "Short password.",
   "kNullError": "Empty field/s.",
   "smth_wrong": "Something is wrong!",
   "wrong_e_p": "Wrong email or password provided.",
@@ -47,7 +47,4 @@
   "enter_postalcode": "Enter your postal code",
   "city": "City",
   "enter_city": "Enter your city"
-
-
-
 }

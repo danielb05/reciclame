@@ -4,9 +4,9 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 void main() => runApp(new DescriptionPage(null));
 
 class DescriptionPage extends StatelessWidget {
+  DescriptionPage(this.urlnews);
 
-DescriptionPage(this.urlnews);
-final String urlnews;
+  final String urlnews;
 
   @override
   Widget build(BuildContext context) {
@@ -27,5 +27,4 @@ final String urlnews;
       ),
     );
   }
-  }
-
+}

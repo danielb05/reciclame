@@ -7,11 +7,9 @@ class ContainerService {
 
   factory ContainerService() => instance;
 
-
   getAll() async {
-    var snapshot = await FirebaseFirestore.instance
-        .collection('container')
-        .get();
+    var snapshot =
+        await FirebaseFirestore.instance.collection('container').get();
 
     List res = new List();
 
@@ -30,5 +28,4 @@ class ContainerService {
 
     return (snapshot.docs[0].data());
   }
-
 }

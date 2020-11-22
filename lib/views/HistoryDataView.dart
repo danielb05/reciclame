@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
 
-
 class HistoryDataView extends StatefulWidget {
   @override
   _HistoryDataViewState createState() => _HistoryDataViewState();
@@ -10,175 +9,173 @@ class HistoryDataView extends StatefulWidget {
 
 class _HistoryDataViewState extends State<HistoryDataView> {
   int touchedIndex;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          _getPieChart(),
-            SizedBox(height: 10),
-            _getLinealChart()
-          ],
-        ),
+      margin: EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [_getPieChart(), SizedBox(height: 10), _getLinealChart()],
+      ),
     );
   }
 
   AspectRatio _getPieChart() {
-
     String paper = getTranslated(context, 'paper');
     return AspectRatio(
-        aspectRatio: 1.3,
-        child: Card(
-          color: Colors.white,
-          child: Row(
-            children: <Widget>[
-              const SizedBox(
-                height: 18,
-              ),
-              Expanded(
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: PieChart(
-                    PieChartData(
-                        pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
-                          setState(() {
-                            if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                                pieTouchResponse.touchInput is FlPanEnd) {
-                              touchedIndex = -1;
-                            } else {
-                              touchedIndex = pieTouchResponse.touchedSectionIndex;
-                            }
-                          });
-                        }),
-                        borderData: FlBorderData(
-                          show: false,
-                        ),
-                        sectionsSpace: 0,
-                        centerSpaceRadius: 40,
-                        sections: showingSections(touchedIndex)),
-                  ),
+      aspectRatio: 1.3,
+      child: Card(
+        color: Colors.white,
+        child: Row(
+          children: <Widget>[
+            const SizedBox(
+              height: 18,
+            ),
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: PieChart(
+                  PieChartData(
+                      pieTouchData:
+                          PieTouchData(touchCallback: (pieTouchResponse) {
+                        setState(() {
+                          if (pieTouchResponse.touchInput is FlLongPressEnd ||
+                              pieTouchResponse.touchInput is FlPanEnd) {
+                            touchedIndex = -1;
+                          } else {
+                            touchedIndex = pieTouchResponse.touchedSectionIndex;
+                          }
+                        });
+                      }),
+                      borderData: FlBorderData(
+                        show: false,
+                      ),
+                      sectionsSpace: 0,
+                      centerSpaceRadius: 40,
+                      sections: showingSections(touchedIndex)),
                 ),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
-                  Indicator(
-                    color: Color(0xff0293ee),
-                    text: 'paper',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Indicator(
-                    color: Colors.brown,
-                    text: 'organic',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Indicator(
-                    color: Color(0xFFFDD835),
-                    text: 'plastic',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Indicator(
-                    color: Color(0xff13d38e),
-                    text: 'glass',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Indicator(
-                    color: Colors.grey,
-                    text: 'non-recyclable',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 18,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 28,
-              ),
-            ],
-          ),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const <Widget>[
+                Indicator(
+                  color: Color(0xff0293ee),
+                  text: 'paper',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: Colors.brown,
+                  text: 'organic',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: Color(0xFFFDD835),
+                  text: 'plastic',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: Color(0xff13d38e),
+                  text: 'glass',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: Colors.grey,
+                  text: 'non-recyclable',
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 18,
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 28,
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 
   AspectRatio _getLinealChart() {
     return AspectRatio(
-            aspectRatio: 1.23,
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(18)),
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xff2c274c),
-                    Color(0xff46426c),
-                  ],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
+      aspectRatio: 1.23,
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(18)),
+          gradient: LinearGradient(
+            colors: [
+              Color(0xff2c274c),
+              Color(0xff46426c),
+            ],
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+          ),
+        ),
+        child: Stack(
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                const SizedBox(
+                  height: 15,
                 ),
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Text(getTranslated(context, 'history'),
-                        style: TextStyle(
-                          color: Color(0xff827daa),
-                          fontSize: 16,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        getTranslated(context, 'monthly_recycling'),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 2),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-                          child: LineChart(
-                            sampleData(),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
+                Text(
+                  getTranslated(context, 'history'),
+                  style: TextStyle(
+                    color: Color(0xff827daa),
+                    fontSize: 16,
                   ),
-                ],
-              ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  getTranslated(context, 'monthly_recycling'),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16.0, left: 6.0),
+                    child: LineChart(
+                      sampleData(),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
-          );
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -342,9 +339,7 @@ List<LineChartBarData> linesBarData1() {
       FlSpot(13, 5),
     ],
     isCurved: true,
-    colors: const [
-      Color(0xFFFDD835)
-    ],
+    colors: const [Color(0xFFFDD835)],
     barWidth: 3,
     isStrokeCapRound: true,
     dotData: FlDotData(
@@ -363,9 +358,7 @@ List<LineChartBarData> linesBarData1() {
       FlSpot(13, 1),
     ],
     isCurved: true,
-    colors: const [
-      Colors.grey
-    ],
+    colors: const [Colors.grey],
     barWidth: 3,
     isStrokeCapRound: true,
     dotData: FlDotData(
@@ -375,13 +368,7 @@ List<LineChartBarData> linesBarData1() {
       show: false,
     ),
   );
-  return [
-    green,
-    brown,
-    blue,
-    yellow,
-    non_recyclable
-  ];
+  return [green, brown, blue, yellow, non_recyclable];
 }
 
 List<PieChartSectionData> showingSections(int touchedIndex) {
@@ -397,7 +384,9 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
           title: '6%',
           radius: radius,
           titleStyle: TextStyle(
-              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xffffffff)),
         );
       case 1:
         return PieChartSectionData(
@@ -406,7 +395,9 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
           title: '41%',
           radius: radius,
           titleStyle: TextStyle(
-              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xffffffff)),
         );
       case 2:
         return PieChartSectionData(
@@ -415,7 +406,9 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
           title: '25%',
           radius: radius,
           titleStyle: TextStyle(
-              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xffffffff)),
         );
       case 3:
         return PieChartSectionData(
@@ -424,7 +417,9 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
           title: '12%',
           radius: radius,
           titleStyle: TextStyle(
-              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xffffffff)),
         );
       case 4:
         return PieChartSectionData(
@@ -433,13 +428,16 @@ List<PieChartSectionData> showingSections(int touchedIndex) {
           title: '16%',
           radius: radius,
           titleStyle: TextStyle(
-              fontSize: fontSize, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xffffffff)),
         );
       default:
         return null;
     }
   });
 }
+
 class Indicator extends StatelessWidget {
   final Color color;
   final String text;
@@ -473,7 +471,8 @@ class Indicator extends StatelessWidget {
         ),
         Text(
           getTranslated(context, text),
-          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: textColor),
+          style: TextStyle(
+              fontSize: 12, fontWeight: FontWeight.bold, color: textColor),
         )
       ],
     );

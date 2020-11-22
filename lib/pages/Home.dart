@@ -72,7 +72,6 @@ class _HomeState extends State<Home> {
               child: Icon(Icons.settings, size: 22.0),
             ),
           )
-
         ],
       ),
       body: Center(

@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:reciclame/constants.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/pages/SignUp/FormSignUp.dart';
 
 void main() {
   runApp(SignUp());
 }
+
 TextEditingController emailValue = new TextEditingController();
 TextEditingController passwordValue = new TextEditingController();
 TextEditingController confirmPasswordValue = new TextEditingController();
@@ -20,23 +19,22 @@ class SignUp extends StatefulWidget {
   @override
   _SignUp createState() => _SignUp();
 }
-class _SignUp extends State<SignUp> {
 
+class _SignUp extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-                appBar: AppBar(
-                  title: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      getTranslated(context, 'title').toUpperCase(),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-                body: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 50.0),
-                  child: FormSignUp()
-                ));
+        appBar: AppBar(
+          title: Align(
+            alignment: Alignment.center,
+            child: Text(
+              getTranslated(context, 'title').toUpperCase(),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        body: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+            child: FormSignUp()));
   }
 }

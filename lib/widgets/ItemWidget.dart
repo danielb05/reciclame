@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class ItemWidget extends StatelessWidget {
   const ItemWidget({
     Key key,
@@ -13,25 +14,22 @@ class ItemWidget extends StatelessWidget {
         color: Colors.green[100],
         child: Padding(
             padding: EdgeInsets.all(10),
-            child:Center(
-              child:
-              Row(
-                  children:[
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: CircleAvatar(
-                            backgroundImage:AssetImage('assets/'+entries+'.jpg'),
-                            radius: 50.0,
-                          ),
-                        ),
-                      ],
+            child: Center(
+              child: Row(children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/' + entries + '.jpg'),
+                        radius: 50.0,
+                      ),
                     ),
-                    Text('Entry $entries'),
-                  ]),
-            )
-        )
-    );
+                  ],
+                ),
+                Text('Entry $entries'),
+              ]),
+            )));
   }
 }

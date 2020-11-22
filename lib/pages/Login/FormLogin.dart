@@ -11,14 +11,13 @@ class FormLogin extends StatefulWidget {
 }
 
 class _FormLoginState extends State<FormLogin> {
-
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;
   final List<String> errors = [];
 
   void addError({String error}) {
-    if (!errors.contains(error)){
+    if (!errors.contains(error)) {
       setState(() {
         errors.add(error);
       });
@@ -26,7 +25,7 @@ class _FormLoginState extends State<FormLogin> {
   }
 
   void removeError({String error}) {
-    if (errors.contains(error)){
+    if (errors.contains(error)) {
       setState(() {
         errors.remove(error);
       });
@@ -34,20 +33,26 @@ class _FormLoginState extends State<FormLogin> {
   }
 
   _login() async {
-   switch (await AuthService.instance.login(email, password)){
-     case "successful":
-       Navigator.pop(context);
-       Navigator.pop(context);
-       break;
-     case 'user-not-found':
-       print('No user found for that email.');
-       break;
-     case  "wrong-password":
-       Scaffold.of(context).showSnackBar(SnackBar(content: Text(getTranslated(context, 'wrong_e_p'),textAlign: TextAlign.center),backgroundColor: Colors.red));
-       break;
-     default:
-       Scaffold.of(context).showSnackBar(SnackBar(content: Text(getTranslated(context, 'smth_wrong'),textAlign: TextAlign.center),backgroundColor: Colors.red));
-   }
+    switch (await AuthService.instance.login(email, password)) {
+      case "successful":
+        Navigator.pop(context);
+        Navigator.pop(context);
+        break;
+      case 'user-not-found':
+        print('No user found for that email.');
+        break;
+      case "wrong-password":
+        Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(getTranslated(context, 'wrong_e_p'),
+                textAlign: TextAlign.center),
+            backgroundColor: Colors.red));
+        break;
+      default:
+        Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(getTranslated(context, 'smth_wrong'),
+                textAlign: TextAlign.center),
+            backgroundColor: Colors.red));
+    }
   }
 
   @override
@@ -60,21 +65,18 @@ class _FormLoginState extends State<FormLogin> {
           SizedBox(height: 20),
           buildPasswordFormField(),
           SizedBox(height: 30),
-          FormError(errors:errors),
+          FormError(errors: errors),
           SizedBox(height: 30),
           SizedBox(
             width: double.infinity,
             height: 56.0,
             child: FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               color: kPrimaryColor,
               child: Text(getTranslated(context, 'continue'),
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white
-                  )
-              ),
-              onPressed:() async {
+                  style: TextStyle(fontSize: 18, color: Colors.white)),
+              onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
                   await _login();
@@ -105,10 +107,10 @@ class _FormLoginState extends State<FormLogin> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: getTranslated(context,'password'),
+        labelText: getTranslated(context, 'password'),
         hintText: getTranslated(context, 'enter_password'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.lock_outline_rounded,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.lock_outline_rounded, color: kPrimaryColor),
       ),
     );
   }
@@ -136,10 +138,10 @@ class _FormLoginState extends State<FormLogin> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: getTranslated(context,'email'),
+        labelText: getTranslated(context, 'email'),
         hintText: getTranslated(context, 'enter_email'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.alternate_email,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.alternate_email, color: kPrimaryColor),
       ),
     );
   }

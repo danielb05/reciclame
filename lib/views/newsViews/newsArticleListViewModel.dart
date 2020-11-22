@@ -8,7 +8,8 @@ class NewsArticleListViewModel extends ChangeNotifier {
   List<NewsArticleViewModel> articles = List<NewsArticleViewModel>();
 
   void populateTopHeadlines(context) async {
-    List<NewsArticle> newsArticles = await WebService().fetchTopHeadlines(context);
+    List<NewsArticle> newsArticles =
+        await WebService().fetchTopHeadlines(context);
     this.articles = newsArticles
         .map((article) => NewsArticleViewModel(article: article))
         .toList();

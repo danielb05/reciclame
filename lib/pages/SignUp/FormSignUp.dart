@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/components/FormError.dart';
 import 'package:reciclame/localization/language_constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reciclame/models/custom_user.dart';
+
 import '../../constants.dart';
 
 class FormSignUp extends StatefulWidget {
@@ -11,8 +12,7 @@ class FormSignUp extends StatefulWidget {
   _FormSignUpState createState() => _FormSignUpState();
 }
 
-class _FormSignUpState extends State<FormSignUp>{
-
+class _FormSignUpState extends State<FormSignUp> {
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;
@@ -30,7 +30,7 @@ class _FormSignUpState extends State<FormSignUp>{
   final List<String> errors = [];
 
   void addError({String error}) {
-    if (!errors.contains(error)){
+    if (!errors.contains(error)) {
       setState(() {
         errors.add(error);
       });
@@ -38,7 +38,7 @@ class _FormSignUpState extends State<FormSignUp>{
   }
 
   void removeError({String error}) {
-    if (errors.contains(error)){
+    if (errors.contains(error)) {
       setState(() {
         errors.remove(error);
       });
@@ -47,28 +47,32 @@ class _FormSignUpState extends State<FormSignUp>{
 
   _signUp() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password:password
-      );
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-      CollectionReference userData = FirebaseFirestore.instance.collection('userData');
-      var user = new CustomUser(userCredential.user.uid,false,fullName,"default",city,postalCode,0,true);
-      userData.add(user.toJson()).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));
+      CollectionReference userData =
+          FirebaseFirestore.instance.collection('userData');
+      var user = new CustomUser(userCredential.user.uid, false, fullName,
+          "default", city, postalCode, 0, true);
+      userData
+          .add(user.toJson())
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
 
       Navigator.pushReplacementNamed(context, '/login');
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text(getTranslated(context, 'account_exist'),textAlign: TextAlign.center),backgroundColor: Colors.red));
+        Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(getTranslated(context, 'account_exist'),
+                textAlign: TextAlign.center),
+            backgroundColor: Colors.red));
       }
     } catch (e) {
       print(e);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,21 +90,18 @@ class _FormSignUpState extends State<FormSignUp>{
           SizedBox(height: 10),
           buildCityFormField(),
           SizedBox(height: 10),
-          FormError(errors:errors),
+          FormError(errors: errors),
           SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
             height: 56.0,
             child: FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               color: kPrimaryColor,
               child: Text(getTranslated(context, 'continue'),
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white
-                  )
-              ),
-              onPressed:() async {
+                  style: TextStyle(fontSize: 18, color: Colors.white)),
+              onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
                   await _signUp();
@@ -134,7 +135,7 @@ class _FormSignUpState extends State<FormSignUp>{
         labelText: getTranslated(context, 'full_name'),
         hintText: getTranslated(context, 'enter_fullname'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.account_circle_rounded,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.account_circle_rounded, color: kPrimaryColor),
       ),
     );
   }
@@ -160,7 +161,7 @@ class _FormSignUpState extends State<FormSignUp>{
         labelText: getTranslated(context, 'postalcode'),
         hintText: getTranslated(context, 'enter_postalcode'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.pin_drop_sharp,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.pin_drop_sharp, color: kPrimaryColor),
       ),
     );
   }
@@ -186,7 +187,7 @@ class _FormSignUpState extends State<FormSignUp>{
         labelText: getTranslated(context, 'city'),
         hintText: getTranslated(context, 'enter_city'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.map_outlined,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.map_outlined, color: kPrimaryColor),
       ),
     );
   }
@@ -217,7 +218,7 @@ class _FormSignUpState extends State<FormSignUp>{
         labelText: getTranslated(context, 'email'),
         hintText: getTranslated(context, 'enter_email'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.alternate_email,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.alternate_email, color: kPrimaryColor),
       ),
     );
   }
@@ -246,9 +247,9 @@ class _FormSignUpState extends State<FormSignUp>{
       },
       decoration: InputDecoration(
         labelText: getTranslated(context, "password"),
-        hintText: getTranslated(context,"enter_password"),
+        hintText: getTranslated(context, "enter_password"),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.lock_outline_rounded,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.lock_outline_rounded, color: kPrimaryColor),
       ),
     );
   }

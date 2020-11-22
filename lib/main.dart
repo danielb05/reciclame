@@ -7,17 +7,10 @@ import 'package:reciclame/pages/ItemDetail.dart';
 import 'package:reciclame/pages/Login/Login.dart';
 import 'package:reciclame/pages/Opening.dart';
 import 'package:reciclame/pages/Settings.dart';
-
-import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/Login/Login.dart';
-import 'file:///C:/Users/francesc/Desktop/reciclame/lib/pages/SignUp/SignUp.dart';
-
 import 'package:reciclame/pages/SignUp/SignUp.dart';
-
-
 
 import 'localization/demo_localization.dart';
 import 'localization/language_constants.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +39,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   Locale _locale;
 
   setLocale(Locale locale) {
@@ -102,9 +94,11 @@ class _MyAppState extends State<MyApp> {
           '/home': (context) => Home(),
           '/login': (context) => Login(),
           '/opening': (context) => Opening(),
-          '/settings': (context) => Settings(ModalRoute.of(context).settings.arguments),
+          '/settings': (context) =>
+              Settings(ModalRoute.of(context).settings.arguments),
           '/signup': (context) => SignUp(),
-          '/item': (context) => ItemDetail(ModalRoute.of(context).settings.arguments)
+          '/item': (context) =>
+              ItemDetail(ModalRoute.of(context).settings.arguments)
         },
         theme: ThemeData(
             scaffoldBackgroundColor: kBackgroundColor,

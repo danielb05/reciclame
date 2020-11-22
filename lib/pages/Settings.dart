@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
-import 'package:reciclame/views/newsViews/description.dart';
-import 'package:reciclame/views/newsViews/newsList.dart';
 import 'package:reciclame/services/authService.dart';
-import 'package:reciclame/services/containserService.dart';
 import 'package:reciclame/widgets/AccountWidget.dart';
 
 import '../constants.dart';
 
 class Settings extends StatefulWidget {
   final Map arguments;
+
   Settings(this.arguments);
 
   @override
@@ -18,7 +16,7 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   bool isLogged;
-  String  email;
+  String email;
   String fullname;
   int level;
   String location;
@@ -80,12 +78,12 @@ class _SettingsState extends State<Settings> {
                     padding: const EdgeInsets.all(16.0),
                     child: Align(
                         alignment: Alignment.bottomCenter,
-                      child: sessionButton()))
+                        child: sessionButton()))
               ],
             )),
       ),
-      onWillPop: (){
-          Navigator.pop(context);
+      onWillPop: () {
+        Navigator.pop(context);
       },
     );
   }

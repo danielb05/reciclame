@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserService {
@@ -13,6 +14,6 @@ class UserService {
         .collection('userData')
         .where('uid', isEqualTo: uid)
         .get();
-    return(snapshot.docs[0].data());
+    return (snapshot.docs[0].data());
   }
 }

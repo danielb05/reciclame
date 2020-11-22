@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
 
-import 'package:reciclame/pages/SignUp/SignUp.dart';
 import '../../constants.dart';
 import 'FormLogin.dart';
 
@@ -42,7 +41,7 @@ class _LoginState extends State<Login> {
                   children: [
                     SizedBox(height: 15),
                     Text(
-                      getTranslated(context,'welcome'),
+                      getTranslated(context, 'welcome'),
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 28,
@@ -54,13 +53,14 @@ class _LoginState extends State<Login> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(getTranslated(context, 'create_account'),
+                        Text(
+                          getTranslated(context, 'create_account'),
                           style: TextStyle(fontSize: 16),
                         ),
                         GestureDetector(
                           onTap: () => Navigator.pushNamed(context, '/signup'),
                           child: Text(
-                            getTranslated(context,'sign_up'),
+                            getTranslated(context, 'sign_up'),
                             style:
                                 TextStyle(fontSize: 18.0, color: kPrimaryColor),
                           ),
@@ -72,7 +72,6 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-        )
-    );
+        ));
   }
 }
