@@ -1,4 +1,13 @@
-import 'package:flutter/material.dart' show BorderRadius, BoxDecoration, BoxShadow, Color, Colors, FontWeight, Offset, TextStyle;
+import 'package:flutter/material.dart'
+    show
+        BorderRadius,
+        BoxDecoration,
+        BoxShadow,
+        Color,
+        Colors,
+        FontWeight,
+        Offset,
+        TextStyle;
 
 const kPrimaryColor = Color(0xFF0C9869);
 const kTextColor = Color(0xFF3C4046);
@@ -17,15 +26,9 @@ final kLabelStyle = TextStyle(
   fontFamily: 'OpenSans',
 );
 
-
 //Validators
-final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-const String kEmailNullError = "Por favor introduzca su email";
-const String kNullError = "Valor vacio.";
-const String kInvalidEmailError = "Por favor introduzca un email valido";
-const String kPassNullError = "Por favor introduzca su contraseña";
-const String kShortPassError = "Contraseña muy corta";
-const String kMatchPassError = "La contraseña no coincide";
+final RegExp emailValidatorRegExp =
+    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
 final kBoxDecorationStyle = BoxDecoration(
   color: Color(0xFFd8f3dc),

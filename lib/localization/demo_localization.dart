@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,6 +7,7 @@ class DemoLocalization {
   DemoLocalization(this.locale);
 
   final Locale locale;
+
   static DemoLocalization of(BuildContext context) {
     return Localizations.of<DemoLocalization>(context, DemoLocalization);
   }
@@ -14,7 +16,7 @@ class DemoLocalization {
 
   Future<void> load() async {
     String jsonStringValues =
-    await rootBundle.loadString('lib/lang/${locale.languageCode}.json');
+        await rootBundle.loadString('lib/lang/${locale.languageCode}.json');
     Map<String, dynamic> mappedJson = json.decode(jsonStringValues);
     _localizedValues =
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
@@ -26,7 +28,7 @@ class DemoLocalization {
 
   // static member to have simple access to the delegate from Material App
   static const LocalizationsDelegate<DemoLocalization> delegate =
-  _DemoLocalizationsDelegate();
+      _DemoLocalizationsDelegate();
 }
 
 class _DemoLocalizationsDelegate

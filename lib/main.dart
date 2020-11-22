@@ -9,8 +9,6 @@ import 'package:reciclame/pages/Opening.dart';
 import 'package:reciclame/pages/Settings.dart';
 import 'package:reciclame/pages/SignUp/SignUp.dart';
 
-
-
 import 'localization/demo_localization.dart';
 import 'localization/language_constants.dart';
 
@@ -96,9 +94,11 @@ class _MyAppState extends State<MyApp> {
           '/home': (context) => Home(),
           '/login': (context) => Login(),
           '/opening': (context) => Opening(),
-          '/settings': (context) => Settings(ModalRoute.of(context).settings.arguments),
+          '/settings': (context) =>
+              Settings(ModalRoute.of(context).settings.arguments),
           '/signup': (context) => SignUp(),
-          '/item': (context) => ItemDetail(ModalRoute.of(context).settings.arguments)
+          '/item': (context) =>
+              ItemDetail(ModalRoute.of(context).settings.arguments)
         },
         theme: ThemeData(
             scaffoldBackgroundColor: kBackgroundColor,

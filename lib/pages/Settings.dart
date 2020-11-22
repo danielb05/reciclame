@@ -1,13 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
-import 'package:reciclame/views/newsViews/description.dart';
-import 'package:reciclame/views/newsViews/newsList.dart';
+import 'package:reciclame/services/authService.dart';
 import 'package:reciclame/widgets/AccountWidget.dart';
+
 import '../constants.dart';
 
 class Settings extends StatefulWidget {
   final Map arguments;
+
   Settings(this.arguments);
 
   @override
@@ -16,7 +16,7 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   bool isLogged;
-  String  email;
+  String email;
   String fullname;
   int level;
   String location;
@@ -24,49 +24,38 @@ class _SettingsState extends State<Settings> {
   @override
   void initState() {
     super.initState();
-    _isLogged();
+
+    setState(() {
+      isLogged = AuthService.instance.isLogged();
+    });
   }
 
   @override
   void setState(fn) {
-    if(mounted) {
+    if (mounted) {
       super.setState(fn);
     }
   }
 
-  _isLogged(){
-    FirebaseAuth.instance.authStateChanges().listen((User user) {
-      setState(() {
-        isLogged = !(user == null ?? false);
-      });
-    });
-  }
-
   _logout() async {
-    await FirebaseAuth.instance.signOut();
+    await AuthService.instance.logout();
     Navigator.pop(context);
     Navigator.pushReplacementNamed(context, '/home');
   }
 
   RaisedButton sessionButton() {
-
     return !(isLogged ?? false)
         ? RaisedButton(
             onPressed: () {
               Navigator.pushNamed(context, '/login');
             },
-            child:
-                Text(getTranslated(context, 'log_in'), style: TextStyle(color: kTextColor)),
+            child: Text(getTranslated(context, 'log_in'),
+                style: TextStyle(color: kTextColor)),
             color: kPrimaryColor,
           )
         : RaisedButton(
-            onPressed: () {
-              FutureBuilder(
-                  future: _logout() ,
-                  builder: (context, snapshot){
-                    print('Close Session');
-                  }
-              );
+            onPressed: () async {
+              await _logout();
             },
             color: Colors.redAccent,
             child: Text(getTranslated(context, 'close_session')));
@@ -88,12 +77,13 @@ class _SettingsState extends State<Settings> {
                 Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Align(
-                        alignment: Alignment.bottomCenter, child: sessionButton()))
+                        alignment: Alignment.bottomCenter,
+                        child: sessionButton()))
               ],
             )),
       ),
-      onWillPop: (){
-          Navigator.pop(context);
+      onWillPop: () {
+        Navigator.pop(context);
       },
     );
   }

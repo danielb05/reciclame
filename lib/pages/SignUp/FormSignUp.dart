@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/components/FormError.dart';
 import 'package:reciclame/localization/language_constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reciclame/models/custom_user.dart';
+
 import '../../constants.dart';
 
 class FormSignUp extends StatefulWidget {
@@ -11,8 +12,7 @@ class FormSignUp extends StatefulWidget {
   _FormSignUpState createState() => _FormSignUpState();
 }
 
-class _FormSignUpState extends State<FormSignUp>{
-
+class _FormSignUpState extends State<FormSignUp> {
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;
@@ -30,7 +30,7 @@ class _FormSignUpState extends State<FormSignUp>{
   final List<String> errors = [];
 
   void addError({String error}) {
-    if (!errors.contains(error)){
+    if (!errors.contains(error)) {
       setState(() {
         errors.add(error);
       });
@@ -38,7 +38,7 @@ class _FormSignUpState extends State<FormSignUp>{
   }
 
   void removeError({String error}) {
-    if (errors.contains(error)){
+    if (errors.contains(error)) {
       setState(() {
         errors.remove(error);
       });
@@ -47,28 +47,32 @@ class _FormSignUpState extends State<FormSignUp>{
 
   _signUp() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password:password
-      );
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-      CollectionReference userData = FirebaseFirestore.instance.collection('userData');
-      var user = new CustomUser(userCredential.user.uid,false,fullName,"default",postalCode,city,0,true);
-      userData.add(user.toJson()).then((value) => print("User Added")).catchError((error) => print("Failed to add user: $error"));
+      CollectionReference userData =
+          FirebaseFirestore.instance.collection('userData');
+      var user = new CustomUser(userCredential.user.uid, false, fullName,
+          "default", city, postalCode, 0, true);
+      userData
+          .add(user.toJson())
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
 
       Navigator.pushReplacementNamed(context, '/login');
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text('The account already exists for that email.',textAlign: TextAlign.center),backgroundColor: Colors.red));
+        Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(getTranslated(context, 'account_exist'),
+                textAlign: TextAlign.center),
+            backgroundColor: Colors.red));
       }
     } catch (e) {
       print(e);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,29 +90,21 @@ class _FormSignUpState extends State<FormSignUp>{
           SizedBox(height: 10),
           buildCityFormField(),
           SizedBox(height: 10),
-          FormError(errors:errors),
+          FormError(errors: errors),
           SizedBox(height: 20),
           SizedBox(
             width: double.infinity,
             height: 56.0,
             child: FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               color: kPrimaryColor,
-              child: Text('Continue',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white
-                  )
-              ),
-              onPressed:() {
+              child: Text(getTranslated(context, 'continue'),
+                  style: TextStyle(fontSize: 18, color: Colors.white)),
+              onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-                  FutureBuilder(
-                      future: _signUp(),
-                      builder: (context, snapshot){
-                        print('In Builder');
-                      }
-                  );
+                  await _signUp();
                 }
               },
             ),
@@ -124,22 +120,22 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => fullName = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNullError);
+          removeError(error: getTranslated(context, 'kNullError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNullError);
+          addError(error: getTranslated(context, 'kNullError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Full Name",
-        hintText: "Introduzca su nombre y apellidos",
+        labelText: getTranslated(context, 'full_name'),
+        hintText: getTranslated(context, 'enter_fullname'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.account_circle_rounded,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.account_circle_rounded, color: kPrimaryColor),
       ),
     );
   }
@@ -150,22 +146,22 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => postalCode = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNullError);
+          removeError(error: getTranslated(context, 'kNullError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNullError);
+          addError(error: getTranslated(context, 'kNullError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Postal Code",
-        hintText: "Introduzca su codigo postal",
+        labelText: getTranslated(context, 'postalcode'),
+        hintText: getTranslated(context, 'enter_postalcode'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.pin_drop_sharp,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.pin_drop_sharp, color: kPrimaryColor),
       ),
     );
   }
@@ -176,22 +172,22 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => city = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNullError);
+          removeError(error: getTranslated(context, 'kNullError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNullError);
+          addError(error: getTranslated(context, 'kNullError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Ciudad",
-        hintText: "Introduzca su ciudad",
+        labelText: getTranslated(context, 'city'),
+        hintText: getTranslated(context, 'enter_city'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.map_outlined,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.map_outlined, color: kPrimaryColor),
       ),
     );
   }
@@ -202,27 +198,27 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+          removeError(error: getTranslated(context, 'kEmailNullError'));
         } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          removeError(error: getTranslated(context, 'kInvalidEmailError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kEmailNullError);
+          addError(error: getTranslated(context, 'kEmailNullError'));
           return "";
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
+          addError(error: getTranslated(context, 'kInvalidEmailError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Email",
-        hintText: "Introduzca su email",
+        labelText: getTranslated(context, 'email'),
+        hintText: getTranslated(context, 'enter_email'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.alternate_email,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.alternate_email, color: kPrimaryColor),
       ),
     );
   }
@@ -233,27 +229,27 @@ class _FormSignUpState extends State<FormSignUp>{
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+          removeError(error: getTranslated(context, 'kPassNullError'));
         } else if (value.length >= 8) {
-          removeError(error: kShortPassError);
+          removeError(error: getTranslated(context, 'kShortPassError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPassNullError);
+          addError(error: getTranslated(context, 'kPassNullError'));
           return "";
         } else if (value.length < 8) {
-          addError(error: kShortPassError);
+          addError(error: getTranslated(context, 'kShortPassError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
         labelText: getTranslated(context, "password"),
-        hintText: "Introduzca su contraseña",
+        hintText: getTranslated(context, "enter_password"),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.lock_outline_rounded,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.lock_outline_rounded, color: kPrimaryColor),
       ),
     );
   }

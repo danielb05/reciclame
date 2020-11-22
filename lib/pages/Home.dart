@@ -17,11 +17,12 @@ import 'package:flutter/material.dart'
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reciclame/localization/language_constants.dart';
-import 'package:reciclame/views/newsViews/newsList.dart';
 import 'package:reciclame/views/BinLocatorView.dart';
 import 'package:reciclame/views/FindView.dart';
 import 'package:reciclame/views/HistoryDataView.dart';
 import 'package:reciclame/views/newsViews/newsArticleListViewModel.dart';
+import 'package:reciclame/views/newsViews/newsList.dart';
+
 import '../constants.dart';
 
 class Home extends StatefulWidget {
@@ -40,10 +41,8 @@ class _HomeState extends State<Home> {
     super.initState();
     _widgetOptions = [
       ChangeNotifierProvider(
-          create: (context) => NewsArticleListViewModel(),
-          child: NewsList()
-      ),
-      Text('Scan Object'),//Scan ObjectView
+          create: (context) => NewsArticleListViewModel(), child: NewsList()),
+      Text('Scan Object'), //Scan ObjectView
       BinLocatorView(), //LocationView
       FindView(),
       HistoryDataView(), //ListView
@@ -55,6 +54,7 @@ class _HomeState extends State<Home> {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,13 +62,16 @@ class _HomeState extends State<Home> {
         title: Text(getTranslated(context, 'title').toUpperCase()),
         centerTitle: true,
         actions: [
-          Padding(padding: EdgeInsets.only(right: 20.0),
-          child: GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(context, '/settings',arguments: {'index':_selectedIndex});
-            },
-            child: Icon(Icons.settings,size: 22.0),
-          ),)
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/settings',
+                    arguments: {'index': _selectedIndex});
+              },
+              child: Icon(Icons.settings, size: 22.0),
+            ),
+          )
         ],
       ),
       body: Center(
@@ -79,7 +82,7 @@ class _HomeState extends State<Home> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.new_releases_outlined), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.new_releases_sharp), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),

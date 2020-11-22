@@ -1,6 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/components/FormError.dart';
+import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/services/authService.dart';
+
 import '../../constants.dart';
 
 class FormLogin extends StatefulWidget {
@@ -9,14 +11,13 @@ class FormLogin extends StatefulWidget {
 }
 
 class _FormLoginState extends State<FormLogin> {
-
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;
   final List<String> errors = [];
 
   void addError({String error}) {
-    if (!errors.contains(error)){
+    if (!errors.contains(error)) {
       setState(() {
         errors.add(error);
       });
@@ -24,7 +25,7 @@ class _FormLoginState extends State<FormLogin> {
   }
 
   void removeError({String error}) {
-    if (errors.contains(error)){
+    if (errors.contains(error)) {
       setState(() {
         errors.remove(error);
       });
@@ -32,19 +33,25 @@ class _FormLoginState extends State<FormLogin> {
   }
 
   _login() async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
-      Navigator.pop(context);
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
+    switch (await AuthService.instance.login(email, password)) {
+      case "successful":
+        Navigator.pop(context);
+        Navigator.pop(context);
+        break;
+      case 'user-not-found':
         print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text('Wrong email or password provided.',textAlign: TextAlign.center),backgroundColor: Colors.red));
-      }
+        break;
+      case "wrong-password":
+        Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(getTranslated(context, 'wrong_e_p'),
+                textAlign: TextAlign.center),
+            backgroundColor: Colors.red));
+        break;
+      default:
+        Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(getTranslated(context, 'smth_wrong'),
+                textAlign: TextAlign.center),
+            backgroundColor: Colors.red));
     }
   }
 
@@ -58,29 +65,21 @@ class _FormLoginState extends State<FormLogin> {
           SizedBox(height: 20),
           buildPasswordFormField(),
           SizedBox(height: 30),
-          FormError(errors:errors),
+          FormError(errors: errors),
           SizedBox(height: 30),
           SizedBox(
             width: double.infinity,
             height: 56.0,
             child: FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               color: kPrimaryColor,
-              child: Text('Continuar',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white
-                  )
-              ),
-              onPressed:() {
+              child: Text(getTranslated(context, 'continue'),
+                  style: TextStyle(fontSize: 18, color: Colors.white)),
+              onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-                  FutureBuilder(
-                      future: _login(),
-                      builder: (context, snapshot){
-                        print('In Builder');
-                      }
-                  );
+                  await _login();
                 }
               },
             ),
@@ -96,22 +95,22 @@ class _FormLoginState extends State<FormLogin> {
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+          removeError(error: getTranslated(context, 'kPassNullError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPassNullError);
+          addError(error: getTranslated(context, 'kPassNullError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Contraseña",
-        hintText: "Introduzca su contraseña",
+        labelText: getTranslated(context, 'password'),
+        hintText: getTranslated(context, 'enter_password'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.lock_outline_rounded,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.lock_outline_rounded, color: kPrimaryColor),
       ),
     );
   }
@@ -122,27 +121,27 @@ class _FormLoginState extends State<FormLogin> {
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+          removeError(error: getTranslated(context, 'kEmailNullError'));
         } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          removeError(error: getTranslated(context, 'kInvalidEmailError'));
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kEmailNullError);
+          addError(error: getTranslated(context, 'kEmailNullError'));
           return "";
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
+          addError(error: getTranslated(context, 'kInvalidEmailError'));
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Email",
-        hintText: "Introduzca su email",
+        labelText: getTranslated(context, 'email'),
+        hintText: getTranslated(context, 'enter_email'),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: Icon(Icons.alternate_email,color: kPrimaryColor),
+        suffixIcon: Icon(Icons.alternate_email, color: kPrimaryColor),
       ),
     );
   }
