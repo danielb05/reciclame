@@ -26,13 +26,17 @@ class _AccountWidgetState extends State<AccountWidget> {
   }
 
   String dropdownValue;
+  String locationDropDown;
   List<String> itemsLanguage = ['en', 'es'];
+  List<String> itemsLocation = ['Lleida'];
 
   @override
   void initState() {
     setState(() {
       dropdownValue = _getLanguageCode();
+      locationDropDown = 'Lleida';
     });
+
 
     AuthService.instance.getCredentials().then((value) {
       setState(() {
@@ -102,7 +106,26 @@ class _AccountWidgetState extends State<AccountWidget> {
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold)),
           SizedBox(height: 10.0),
-          _getText('city', 'Undefined'),
+          !widget.isLogged ? DropdownButton<String>(
+            value: locationDropDown,
+            elevation: 16,
+            style: TextStyle(color: Colors.black),
+            underline: Container(
+              height: 2,
+              color: kPrimaryColor,
+            ),
+            onChanged: (String newValue) {
+              setState(() {
+                locationDropDown = newValue;
+              });
+            },
+            items: itemsLocation.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ): _getText('city', 'Undefined'),
           SizedBox(height: 20.0),
           Text(getTranslated(context, 'language').toUpperCase(),
               style: TextStyle(
