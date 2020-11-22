@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
 
+import 'package:reciclame/pages/SignUp/SignUp.dart';
 import '../../constants.dart';
 import 'FormLogin.dart';
 
@@ -71,6 +72,7 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-        ));
+        )
+    );
   }
 }

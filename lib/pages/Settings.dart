@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/views/newsViews/description.dart';
+import 'package:reciclame/views/newsViews/newsList.dart';
 import 'package:reciclame/services/authService.dart';
 import 'package:reciclame/services/containserService.dart';
 import 'package:reciclame/widgets/AccountWidget.dart';
@@ -7,7 +9,8 @@ import 'package:reciclame/widgets/AccountWidget.dart';
 import '../constants.dart';
 
 class Settings extends StatefulWidget {
-  const Settings();
+  final Map arguments;
+  Settings(this.arguments);
 
   @override
   _SettingsState createState() => _SettingsState();
@@ -15,7 +18,7 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   bool isLogged;
-  String email;
+  String  email;
   String fullname;
   int level;
   String location;
@@ -62,23 +65,28 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-          padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              AccountWidget(isLogged: (isLogged ?? false)),
-              Spacer(),
-              Divider(color: kTextColor),
-              Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Align(
-                      alignment: Alignment.bottomCenter,
+    return WillPopScope(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Padding(
+            padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                AccountWidget(isLogged: (isLogged ?? false)),
+                Spacer(),
+                Divider(color: kTextColor),
+                Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Align(
+                        alignment: Alignment.bottomCenter,
                       child: sessionButton()))
-            ],
-          )),
+              ],
+            )),
+      ),
+      onWillPop: (){
+          Navigator.pop(context);
+      },
     );
   }
 }
