@@ -1,5 +1,5 @@
 import 'dart:collection';
-
+import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -40,17 +40,50 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Position _currentPosition;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+  Future <Position> _getCurrentLocation() async{
+    return Future.value(Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best));
+  }
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Stack(
         children: <Widget>[
-          GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: LatLng(41.617592, 0.620015),
-              zoom: 12,
-            ),
-          ),
+          FutureBuilder(
+            future: _getCurrentLocation(),
+              builder:  (BuildContext context, AsyncSnapshot<Position> snapshot){
+                if( snapshot.connectionState == ConnectionState.waiting){
+                  return  Center(child: CircularProgressIndicator());
+                }else{
+                  if (snapshot.hasError){
+                    _scaffoldKey.currentState.showSnackBar(
+                        SnackBar(
+                          content: Text('Assign a GlobalKey to the Scaffold'),
+                          duration: Duration(seconds: 3),
+                        ));
+                    return  Center(child: CircularProgressIndicator());
+                  } else{
+                    return GoogleMap(
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(snapshot.data.latitude,snapshot.data.longitude),
+                        zoom: 12,
+                      ),
+                    );
+                  }
+                }
+              })
+
         ],
       ),
     );
