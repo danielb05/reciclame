@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
@@ -40,17 +41,49 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+  Future <Position> _getCurrentLocation() async{
+    return Future.value(Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: LatLng(41.617592, 0.620015),
-              zoom: 12,
-            ),
-          ),
+          FutureBuilder(
+            future: _getCurrentLocation(),
+              builder:  (BuildContext context, AsyncSnapshot<Position> snapshot){
+                if( snapshot.connectionState == ConnectionState.waiting){
+                  return  Center(child: CircularProgressIndicator());
+                }else{
+                  if (snapshot.hasError){
+                    return  Center(child: CircularProgressIndicator());
+                  } else{
+                    Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+                    final Marker marker = Marker(
+                      markerId: MarkerId('currentLocation'),
+                      position: LatLng(snapshot.data.latitude,snapshot.data.longitude),
+                      infoWindow: InfoWindow(title: 'Me'),
+                    );
+                    markers[MarkerId('currentLocation')] = marker;
+                    return GoogleMap(
+                      markers:Set<Marker>.of(markers.values),
+                      initialCameraPosition: CameraPosition(
+                        target: LatLng(snapshot.data.latitude,snapshot.data.longitude),
+                        zoom: 16,
+                      ),
+                    );
+                  }
+                }
+              })
+
         ],
       ),
     );
