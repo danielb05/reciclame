@@ -27,36 +27,33 @@ class _FindViewState extends State<FindView> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Padding(padding: EdgeInsets.all(15.0),
-          child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: Padding(
+      padding: EdgeInsets.all(15.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           // TODO: Autocomplete Input (Optional)
-            TextField(
+          // TODO: Find element depending language
+          TextField(
             controller: _name,
             onSubmitted: (String value) async {
+              if(value != ""){
+                var products = await ProductService.instance.getByName(value);
 
-              var products = await ProductService.instance.getByName(value);
-              print(products);
-
-              // TODO: Find element depending language
-              // TODO: Match product with materials
-              // TODO: Match materials with bins
-              /*setState(() {
-                if (value.toLowerCase() == 'coke') {
+                products.forEach((item) {
                   setState(() {
+                    entries = products;
                     found_object = true;
-                    entries = <dynamic>[
-                    ];
                   });
-                }
-              });*/
+                });
+              }
             },
             onChanged: (String value) async {
-              if(value.toLowerCase() == ""){
+              if (value.toLowerCase() == "") {
                 setState(() {
                   _name.clear();
                   found_object = false;
@@ -80,22 +77,22 @@ class _FindViewState extends State<FindView> {
                   icon: Icon(Icons.clear),
                 )),
           ),
-            SizedBox(height: 25.0),
-            Expanded(
+          SizedBox(height: 25.0),
+          Expanded(
               child: ListView.separated(
-                padding: const EdgeInsets.all(8),
-                itemCount: entries.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      print(entries[index]);
-                      Navigator.pushNamed(context, '/item',
-                          arguments: {"item": entries[index]});
-                    },
-                    child: ItemWidget(entries: entries[index]),
-                  );
+            padding: const EdgeInsets.all(8),
+            itemCount: entries.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () {
+                  print(entries[index]);
+                  Navigator.pushNamed(context, '/item',
+                      arguments: {"item": entries[index]});
                 },
-                separatorBuilder: (BuildContext context, int index) =>
+                child: ItemWidget(entries: entries[index]),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
                 const Divider(),
           ))
         ],

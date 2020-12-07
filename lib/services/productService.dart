@@ -27,7 +27,7 @@ class ProductService {
         .where('name',isLessThanOrEqualTo: name+'\uf8ff')
         .get();
 
-    List res = new List();
+    List<dynamic> res = new List<dynamic>();
 
     snapshot.docs.forEach((doc) {
       res.add(doc.data());
