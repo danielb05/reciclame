@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/services/productService.dart';
 import 'package:reciclame/widgets/ItemWidget.dart';
 
 class FindView extends StatefulWidget {
@@ -10,7 +11,7 @@ class FindView extends StatefulWidget {
 class _FindViewState extends State<FindView> {
   TextEditingController _name;
   bool found_object;
-  List<String> entries;
+  List<dynamic> entries;
 
   @override
   void initState() {
@@ -22,7 +23,6 @@ class _FindViewState extends State<FindView> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     _name.dispose();
     super.dispose();
   }
@@ -30,26 +30,39 @@ class _FindViewState extends State<FindView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Padding(
-      padding: EdgeInsets.all(15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
+        child: Padding(padding: EdgeInsets.all(15.0),
+          child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          // TODO: Autocomplete Input (Optional)
+            TextField(
             controller: _name,
             onSubmitted: (String value) async {
-              setState(() {
+
+              var products = await ProductService.instance.getByName(value);
+              print(products);
+
+              // TODO: Find element depending language
+              // TODO: Match product with materials
+              // TODO: Match materials with bins
+              /*setState(() {
                 if (value.toLowerCase() == 'coke') {
                   setState(() {
                     found_object = true;
-                    entries = <String>[
-                      'Coke Can',
-                      'Coke Glass Bottle',
-                      'Coke PET Bottle'
+                    entries = <dynamic>[
                     ];
                   });
                 }
-              });
+              });*/
+            },
+            onChanged: (String value) async {
+              if(value.toLowerCase() == ""){
+                setState(() {
+                  _name.clear();
+                  found_object = false;
+                  entries = [];
+                });
+              }
             },
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -67,22 +80,22 @@ class _FindViewState extends State<FindView> {
                   icon: Icon(Icons.clear),
                 )),
           ),
-          SizedBox(height: 25.0),
-          Expanded(
+            SizedBox(height: 25.0),
+            Expanded(
               child: ListView.separated(
-            padding: const EdgeInsets.all(8),
-            itemCount: entries.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                onTap: () {
-                  print(entries[index]);
-                  Navigator.pushNamed(context, '/item',
-                      arguments: {"item": entries[index]});
+                padding: const EdgeInsets.all(8),
+                itemCount: entries.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      print(entries[index]);
+                      Navigator.pushNamed(context, '/item',
+                          arguments: {"item": entries[index]});
+                    },
+                    child: ItemWidget(entries: entries[index]),
+                  );
                 },
-                child: ItemWidget(entries: entries[index]),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
+                separatorBuilder: (BuildContext context, int index) =>
                 const Divider(),
           ))
         ],
