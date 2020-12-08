@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/main.dart';
 import 'package:reciclame/services/productService.dart';
 import 'package:reciclame/widgets/ItemWidget.dart';
 
@@ -27,9 +28,17 @@ class _FindViewState extends State<FindView> {
     super.dispose();
   }
 
+  cleanSearchInput() {
+    setState(() {
+      _name.clear();
+      found_object = false;
+      entries = [];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    String lang = MyApp.getLang(context).split('_')[0];
     return Container(
         child: Padding(
       padding: EdgeInsets.all(15.0),
@@ -41,9 +50,9 @@ class _FindViewState extends State<FindView> {
           TextField(
             controller: _name,
             onSubmitted: (String value) async {
-              if(value != ""){
-                var products = await ProductService.instance.getByName(value);
-
+              if (value != "") {
+                var products =
+                    await ProductService.instance.getByName(value, lang: lang);
                 products.forEach((item) {
                   setState(() {
                     entries = products;
@@ -54,11 +63,7 @@ class _FindViewState extends State<FindView> {
             },
             onChanged: (String value) async {
               if (value.toLowerCase() == "") {
-                setState(() {
-                  _name.clear();
-                  found_object = false;
-                  entries = [];
-                });
+                cleanSearchInput();
               }
             },
             decoration: InputDecoration(
@@ -68,11 +73,7 @@ class _FindViewState extends State<FindView> {
                 prefixIcon: Icon(Icons.search),
                 suffixIcon: IconButton(
                   onPressed: () {
-                    _name.clear();
-                    setState(() {
-                      found_object = false;
-                      entries = [];
-                    });
+                    cleanSearchInput();
                   },
                   icon: Icon(Icons.clear),
                 )),
@@ -87,7 +88,7 @@ class _FindViewState extends State<FindView> {
                 onTap: () {
                   print(entries[index]);
                   Navigator.pushNamed(context, '/item',
-                      arguments: {"item": entries[index]});
+                      arguments: entries[index]);
                 },
                 child: ItemWidget(entries: entries[index]),
               );

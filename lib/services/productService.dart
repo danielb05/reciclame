@@ -19,12 +19,13 @@ class ProductService {
     return res;
   }
 
-  getByName(name) async {
+  getByName(name, {lang = "en"}) async {
+    var queryVal = lang == "es" ? "name_ES" : "name";
     var snapshot = await FirebaseFirestore.instance
         .collection('product')
-        .orderBy('name')
-        .where('name',isGreaterThanOrEqualTo: name)
-        .where('name',isLessThanOrEqualTo: name+'\uf8ff')
+        .orderBy(queryVal)
+        .where(queryVal, isGreaterThanOrEqualTo: name)
+        .where(queryVal, isLessThanOrEqualTo: name + '\uf8ff')
         .get();
 
     List<dynamic> res = new List<dynamic>();

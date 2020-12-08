@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:reciclame/main.dart';
 
 class ItemWidget extends StatelessWidget {
-  const ItemWidget({Key key, @required this.entries,}) : super(key: key);
+  const ItemWidget({
+    Key key,
+    @required this.entries,
+  }) : super(key: key);
 
-  final Map<dynamic,dynamic> entries;
+  final Map<dynamic, dynamic> entries;
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Match product with materials
-    // TODO: Match materials with bins
+    String lang = MyApp.getLang(context).split('_')[0];
     return Card(
         color: Colors.green[100],
         child: Padding(
@@ -27,7 +30,7 @@ class ItemWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Text('Entry '+entries['name']),
+                Text(lang == "en" ? entries['name'] : entries['name_ES'])
               ]),
             )));
   }
