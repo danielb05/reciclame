@@ -23,8 +23,8 @@ class ItemWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(15),
                       child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/' + "anonymous" + '.jpg'),
+                        backgroundImage:entries['pictures']!=null?
+                            NetworkImage(entries['pictures'][0]):NetworkImage('https://blog.nscsports.org/wp-content/uploads/2014/10/default-img.gif'),
                         radius: 50.0,
                       ),
                     ),

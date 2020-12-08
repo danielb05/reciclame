@@ -14,6 +14,7 @@ class ItemDetail extends StatefulWidget {
 class _ItemDetailState extends State<ItemDetail> {
   @override
   Widget build(BuildContext context) {
+    print(widget.arguments);
     String lang = MyApp.getLang(context).split('_')[0];
     // TODO: Match product with materials
     // TODO: Match materials with bins
@@ -25,20 +26,18 @@ class _ItemDetailState extends State<ItemDetail> {
             centerTitle: true),
         body: Center(
             child: Column(children: <Widget>[
-          /*Container(
-          margin: EdgeInsets.all(20),
-          width: 200,
-          height: 200,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-                image:
-                    AssetImage('assets/'),
-                fit: BoxFit.fill),
+              Container(
+            margin: EdgeInsets.all(20),
+            width: 150,
+            height: 150,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                  image: NetworkImage(widget.arguments['pictures'][0]), fit: BoxFit.fill),
+            ),
           ),
-        ),
-        SizedBox(height: 10.0),
-        Container(
+          SizedBox(height: 10.0),
+          /*Container(
           margin: EdgeInsets.all(20),
           child: Chip(
             label: Text(),
