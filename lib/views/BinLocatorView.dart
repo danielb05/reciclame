@@ -1,5 +1,5 @@
 import 'dart:collection';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -42,16 +42,38 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+Map <MarkerId, Marker> recyclingBinsLocationsMarkers = <MarkerId,Marker>{};
   @override
   void initState() {
     super.initState();
     _getCurrentLocation();
+    getRecyclingBinsLocationsFromFirestore();
   }
-
   Future <Position> _getCurrentLocation() async{
     return Future.value(Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best));
   }
-
+  void initiateMarkersInfo(specify,specificId) async{
+    var markerIdValue = specificId;
+    final MarkerId markerId = MarkerId(markerIdValue);
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: LatLng(specify['location'].latitude,specify['location'].longitude),
+      infoWindow: InfoWindow(title: "Reciclame"),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+    );
+    setState(() {
+      recyclingBinsLocationsMarkers[markerId] = marker;
+    });
+  }
+ getRecyclingBinsLocationsFromFirestore() async{
+     Firestore.instance.collection('location').getDocuments().then((myMockData){
+       if(myMockData.documents.isNotEmpty){
+         for(int i=0; i<myMockData.documents.length; i++){
+              initiateMarkersInfo(myMockData.documents[i].data(), myMockData.documents[i].documentID);
+         }
+       }
+     });
+ }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,15 +88,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (snapshot.hasError){
                     return  Center(child: CircularProgressIndicator());
                   } else{
-                    Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
-                    final Marker marker = Marker(
-                      markerId: MarkerId('currentLocation'),
-                      position: LatLng(snapshot.data.latitude,snapshot.data.longitude),
-                      infoWindow: InfoWindow(title: 'Me'),
-                    );
-                    markers[MarkerId('currentLocation')] = marker;
                     return GoogleMap(
-                      markers:Set<Marker>.of(markers.values),
+                      markers:Set<Marker>.of(recyclingBinsLocationsMarkers.values),
+                      myLocationEnabled: true,
+                      compassEnabled: true,
                       initialCameraPosition: CameraPosition(
                         target: LatLng(snapshot.data.latitude,snapshot.data.longitude),
                         zoom: 16,
@@ -83,7 +100,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 }
               })
-
         ],
       ),
     );
