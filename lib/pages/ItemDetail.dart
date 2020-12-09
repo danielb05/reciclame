@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/services/containserService.dart';
@@ -8,6 +9,7 @@ import '../main.dart';
 
 class Item {
   Item({this.isExpanded = false, this.header = "Description", this.description});
+
   bool isExpanded;
   String header;
   String description;
@@ -36,11 +38,21 @@ class _ItemDetailState extends State<ItemDetail> {
 
   Future getContainers() async {
     List bins = new List();
-    for(var materialDocRef in widget.arguments['materials'] ){
+    for (var materialDocRef in widget.arguments['materials']) {
       var value = await ContainerService.instance.findContainer(materialDocRef);
       bins.add(value);
     }
     return Future.value(bins);
+  }
+
+  Future getMaterials()async{
+    List materialList = new List();
+
+    for (var materialDocRef in widget.arguments['materials']) {
+      var value = await MaterialService.instance.getByReference(materialDocRef);
+      materialList.add(value);
+    }
+    return Future.value(materialList);
   }
 
   @override
@@ -89,27 +101,58 @@ class _ItemDetailState extends State<ItemDetail> {
               );
             }).toList(),
           ),
+          SizedBox(height: 40),
               FutureBuilder(
-                future: getContainers(), // function where you call your api
-                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {  // AsyncSnapshot<Your object type>
-                  if( snapshot.connectionState == ConnectionState.waiting){
-                    return  Center(child: CircularProgressIndicator());
-                  }else{
+                future: getMaterials(), // function where you call your api
+                builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  // AsyncSnapshot<Your object type>
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else {
                     if (snapshot.hasError) {
                       return Center(child: CircularProgressIndicator());
-                    }else{
+                    } else {
                       return Expanded(
                         child: new ListView.builder(
                             itemCount: snapshot.data.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return Center(child: Chip(label: Text(' ${snapshot.data[index]["name"]}')));
-                            }
-                        ),
+                              return Center(
+                                  child: Chip(
+                                      label:
+                                      Text('${snapshot.data[index]["name"]}')));
+                            }),
                       );
                     }
                   }
                 },
               ),
+          Divider(color: Colors.black,),
+          FutureBuilder(
+            future: getContainers(), // function where you call your api
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              // AsyncSnapshot<Your object type>
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                if (snapshot.hasError) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  return Expanded(
+                    child: new ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Center(
+                              child: Chip(
+                                  label:
+                                      Text('${snapshot.data[index]["name"]}'),
+                                  backgroundColor:
+                                      HexColor(snapshot.data[index]["color"])));
+                        }),
+                  );
+                }
+              }
+            },
+          ),
           RaisedButton.icon(
             color: kPrimaryColor,
             onPressed: () {
@@ -119,7 +162,7 @@ class _ItemDetailState extends State<ItemDetail> {
             label: Text(getTranslated(context, 'title').toUpperCase()),
             icon: Icon(Icons.restore_from_trash),
           ),
-              SizedBox(height: 40)
+          SizedBox(height: 40)
         ])));
   }
 }
