@@ -1,0 +1,75 @@
+@startuml
+skinparam dpi 200
+skinparam classAttributeFontSize 8
+skinparam classArrowFontSize 9
+skinparam classFontSize 10
+skinparam nodesep 90
+skinparam ranksep 40
+hide stereotype
+skinparam class {
+	BackgroundColor White
+	BackgroundColor<<User>> LightPink
+	BackgroundColor<<Container>> LightBlue
+	BackgroundColor<<Product>> LightGreen
+	BackgroundColor<<Material>> LightYellow
+    BackgroundColor<<Size>> Crimson
+	BackgroundColor<<Location>> LightSalmon
+	BackgroundColor<<Property>> Lavender
+}
+
+class User <<User>>{
+	String fullname
+	String email
+	String password
+	String avatar
+	String city
+	Integer postal_code
+	Integer score
+	Date created_On
+	Date updated_On
+	boolean enable
+}
+
+class Location <<Location>>{
+	Double latitude,
+	Double longitude
+}
+
+class Material <<Material>>{
+	String name
+	String name_ES
+	String description
+	String description_ES
+
+}
+
+class Container <<Container>>{
+	String name
+	String name_ES
+	String description
+	String description_ES
+	List <String> enable_cities
+}
+
+class Product<<Product>>{
+	String name
+	String name_ES
+	String description
+	String description_ES
+	List <Barcode> product_barcode
+	List <String> picture
+}
+
+class Property <<Property>>{
+	String name
+	String name_ES
+	String description
+	String description_ES
+}
+
+Product "1" -- "*" Material: contains >
+Product "*" -- "*" Property: has >
+User "*" -- "1" Location: locate >
+Material "*" -- "1" Container: allows >
+Container"*" -- "1" Location: locate >
+@enduml
