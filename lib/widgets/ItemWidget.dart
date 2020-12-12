@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reciclame/main.dart';
 
 class ItemWidget extends StatelessWidget {
   const ItemWidget({
@@ -6,10 +7,11 @@ class ItemWidget extends StatelessWidget {
     @required this.entries,
   }) : super(key: key);
 
-  final String entries;
+  final Map<dynamic, dynamic> entries;
 
   @override
   Widget build(BuildContext context) {
+    String lang = MyApp.getLang(context).split('_')[0];
     return Card(
         color: Colors.green[100],
         child: Padding(
@@ -21,14 +23,14 @@ class ItemWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(15),
                       child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/' + entries + '.jpg'),
+                        backgroundImage:entries['pictures']!=null?
+                            NetworkImage(entries['pictures'][0]):NetworkImage('https://blog.nscsports.org/wp-content/uploads/2014/10/default-img.gif'),
                         radius: 50.0,
                       ),
                     ),
                   ],
                 ),
-                Text('Entry $entries'),
+                Text(lang == "en" ? entries['name'] : entries['name_ES'])
               ]),
             )));
   }

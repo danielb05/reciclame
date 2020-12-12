@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:reciclame/services/materialService.dart';
 
 class ContainerService {
   static final ContainerService instance = ContainerService._internal();
@@ -20,12 +21,14 @@ class ContainerService {
     return res;
   }
 
-  getByName(name) async {
-    var snapshot = await FirebaseFirestore.instance
-        .collection('container')
-        .where('name', isEqualTo: name)
-        .get();
-
-    return (snapshot.docs[0].data());
+  findContainer(material) async {
+    for(var container in await getAll()){
+       for(var _material in container["materials"]){
+        if (material == _material) {
+          //print(await MaterialService.instance.getByReference(material));
+          return container;
+        }
+      }
+    }
   }
 }
