@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'materialService.dart';
+
 class ProductService {
   static final ProductService instance = ProductService._internal();
 
@@ -26,6 +28,24 @@ class ProductService {
         .orderBy(queryVal)
         .where(queryVal, isGreaterThanOrEqualTo: name)
         .where(queryVal, isLessThanOrEqualTo: name + '\uf8ff')
+        .get();
+
+    List<dynamic> res = new List<dynamic>();
+
+    snapshot.docs.forEach((doc) {
+      res.add(doc.data());
+    });
+
+    return res;
+  }
+
+  getByMaterial(materialName) async {
+
+    var material = await MaterialService.instance.getByName(materialName);
+
+    var snapshot = await FirebaseFirestore.instance
+        .collection('product')
+        .where("materials", arrayContains: "material/"+material)
         .get();
 
     List<dynamic> res = new List<dynamic>();
