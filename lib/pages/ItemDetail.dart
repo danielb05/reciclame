@@ -33,7 +33,7 @@ class _ItemDetailState extends State<ItemDetail> {
 
   @override
   void initState() {
-    print(widget.arguments);
+    (widget.arguments);
     // TODO: implement initState
     super.initState();
     setState(() {
@@ -194,14 +194,12 @@ class _ItemDetailState extends State<ItemDetail> {
                       if (snapshot.hasError) {
                         return Center(child: CircularProgressIndicator());
                       } else {
-                        return Expanded(
-                            child: ListView.separated(
+                        return  ListView.separated(
                           padding: const EdgeInsets.all(8),
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
                               onTap: () {
-                                print(snapshot.data[index]);
                                 Navigator.pushReplacementNamed(context, '/item',
                                     arguments: snapshot.data[index]);
                               },
@@ -210,7 +208,7 @@ class _ItemDetailState extends State<ItemDetail> {
                           },
                           separatorBuilder: (BuildContext context, int index) =>
                               const Divider(),
-                        ));
+                        );
                       }
                     }
                   },
