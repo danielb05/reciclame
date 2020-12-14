@@ -21,6 +21,15 @@ class MaterialService {
     return (snapshot.docs[0].data());
   }
 
+
+  getReferenceByName(name) async{
+    var snapshot = await FirebaseFirestore.instance
+        .collection('material')
+        .where("name", isEqualTo: name)
+        .get();
+    return snapshot.docs[0].reference;
+  }
+
   getAllMaterials() async {
     var snapshot = await FirebaseFirestore.instance.collection('material').get();
 

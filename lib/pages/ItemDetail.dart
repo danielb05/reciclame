@@ -4,6 +4,7 @@ import 'package:reciclame/constants.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/services/containserService.dart';
 import 'package:reciclame/services/materialService.dart';
+import 'package:reciclame/services/productService.dart';
 
 import '../main.dart';
 
@@ -26,13 +27,20 @@ class ItemDetail extends StatefulWidget {
 
 class _ItemDetailState extends State<ItemDetail> {
   List<Item> listItems = new List<Item>();
+  bool isMaterial;
 
   @override
   void initState() {
+    print(widget.arguments);
     // TODO: implement initState
     super.initState();
     setState(() {
       listItems.add(new Item(description: widget.arguments["description"]));
+    });
+    ProductService.instance.isMaterial(widget.arguments["name"]).then((value){
+      setState(() {
+        isMaterial = value;
+      });
     });
   }
 
@@ -45,7 +53,7 @@ class _ItemDetailState extends State<ItemDetail> {
     return Future.value(bins);
   }
 
-  Future getMaterials()async{
+  Future getMaterials() async {
     List materialList = new List();
 
     for (var materialDocRef in widget.arguments['materials']) {
@@ -53,6 +61,11 @@ class _ItemDetailState extends State<ItemDetail> {
       materialList.add(value);
     }
     return Future.value(materialList);
+  }
+
+  Future getProducts() async {
+    var products = await ProductService.instance.getByMaterial(widget.arguments['name']);
+    return Future.value(products);
   }
 
   @override
@@ -66,7 +79,7 @@ class _ItemDetailState extends State<ItemDetail> {
                 ? widget.arguments['name']
                 : widget.arguments['name_ES']),
             centerTitle: true),
-        body: Center(
+        body: !(isMaterial??false) ? Center(
             child: Column(children: <Widget>[
           Container(
             margin: EdgeInsets.all(20),
@@ -163,6 +176,25 @@ class _ItemDetailState extends State<ItemDetail> {
             icon: Icon(Icons.restore_from_trash),
           ),
           SizedBox(height: 40)
-        ])));
+        ])):Center(
+          child: FutureBuilder(
+          future: getProducts(), // function where you call your api
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            // AsyncSnapshot<Your object type>
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              if (snapshot.hasError) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                return Text(snapshot.data.toString())
+                ;
+              }
+            }
+          },
+        ),
+
+
+    ));
   }
 }
