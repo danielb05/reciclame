@@ -42,11 +42,6 @@ class _FindViewState extends State<FindView> {
     search = false;
   }
 
-  void loadMaterials() async{
-
-    materialEntries = await MaterialService.instance.getAllMaterials();
-  }
-
   Future<List<dynamic>> _loadMaterials() async{
     materialEntries = [];
     materialEntries = await MaterialService.instance.getAllMaterials();
