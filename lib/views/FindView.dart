@@ -109,7 +109,7 @@ class _FindViewState extends State<FindView> {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    print(entries[index]);
+                                    print(entries[index]['name']);
                                     Navigator.pushNamed(context, '/item',
                                         arguments: entries[index]);
                                   },
@@ -127,7 +127,7 @@ class _FindViewState extends State<FindView> {
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    print(materialEntries[index]);
+                                    print(materialEntries[index]['name']);
                                     Navigator.pushNamed(context, '/item',
                                         arguments: materialEntries[index]);
                                   },

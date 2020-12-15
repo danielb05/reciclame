@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import 'materialService.dart';
 
@@ -39,13 +40,13 @@ class ProductService {
     return res;
   }
 
-  getByMaterial(materialName) async {
 
-    var material = await MaterialService.instance.getByName(materialName);
+  getByMaterial(materialName) async {
+    var ref = await MaterialService.instance.getReferenceByName(materialName);
 
     var snapshot = await FirebaseFirestore.instance
         .collection('product')
-        .where("materials", arrayContains: "material/"+material)
+        .where("materials", arrayContains:ref)
         .get();
 
     List<dynamic> res = new List<dynamic>();
@@ -55,5 +56,10 @@ class ProductService {
     });
 
     return res;
+  }
+  
+  isMaterial(product) async {
+    var snapshot = await FirebaseFirestore.instance.collection('material').where("name",isEqualTo: product).get();
+    return snapshot.docs.length != 0;
   }
 }
