@@ -3,18 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/services/historyService.dart';
-import 'dart:math';
-
-
-
-String generateRandomHexColor() {
-  Random random = new Random();
-  int length = 6;
-  String chars = '0123456789ABCDEF';
-  String hex = '#';
-  while (length-- > 0) hex += chars[(random.nextInt(16)) | 0];
-  return hex;
-}
 
 class HistoryDataView extends StatefulWidget {
   @override
@@ -28,7 +16,7 @@ class _HistoryDataViewState extends State<HistoryDataView> {
   @override
   void initState() {
     super.initState();
-    HistoryService.instance.getHistory().then((value){
+    HistoryService.instance.getHistory().then((value) {
       setState(() {
         history = value;
       });
@@ -38,11 +26,28 @@ class _HistoryDataViewState extends State<HistoryDataView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _getPieChart(history)
+          _getPieChart(history),
+          (history.length!=0)?
+          Expanded(
+              child: ListView.separated(
+                itemCount: history.length,
+                itemBuilder: (BuildContext context, int index) {
+                  print(history[index]);
+                  return
+                     Indicator(
+                      color: HexColor(history[index]["color"]),
+                      text: history[index]["name"]+" - "+history[index]["quantity"].toString() +" item/s",
+                      isSquare: true,
+                    );
+
+                },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(height: 10),
+          )):CircularProgressIndicator()
         ],
       ),
     );
@@ -53,54 +58,40 @@ class _HistoryDataViewState extends State<HistoryDataView> {
       aspectRatio: 1.3,
       child: Card(
         color: Colors.white,
-        child:
-        Row(
+        child: Row(
           children: <Widget>[
             const SizedBox(
-              height: 18,
+              height: 40,
             ),
-              Expanded(
+            Expanded(
               child: AspectRatio(
                 aspectRatio: 1,
-                child:
-                history.length!=0?
-                PieChart(
-                  PieChartData(
-                      pieTouchData:
-                          PieTouchData(touchCallback: (pieTouchResponse) {
-                        setState(() {
-                          if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                              pieTouchResponse.touchInput is FlPanEnd) {
-                            touchedIndex = -1;
-                          } else {
-                            touchedIndex = pieTouchResponse.touchedSectionIndex;
-                          }
-                        });
-                      }),
-                      borderData: FlBorderData(
-                        show: false,
-                      ),
-                      sectionsSpace: 0,
-                      centerSpaceRadius: 40,
-                      sections: showingSections(history,touchedIndex)),
-                ):CircularProgressIndicator(),
+                child: history.length != 0
+                    ? PieChart(
+                        PieChartData(
+                            pieTouchData:
+                                PieTouchData(touchCallback: (pieTouchResponse) {
+                              setState(() {
+                                if (pieTouchResponse.touchInput
+                                        is FlLongPressEnd ||
+                                    pieTouchResponse.touchInput is FlPanEnd) {
+                                  touchedIndex = -1;
+                                } else {
+                                  touchedIndex =
+                                      pieTouchResponse.touchedSectionIndex;
+                                }
+                              });
+                            }),
+                            borderData: FlBorderData(
+                              show: false,
+                            ),
+                            sectionsSpace: 0,
+                            centerSpaceRadius: 40,
+                            sections: showingSections(history, touchedIndex)),
+                      )
+                    : CircularProgressIndicator(),
               ),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Indicator(
-                  color: Color(0xff0293ee),
-                  text: 'paper',
-                  isSquare: true,
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-              ],
-            )
           ],
         ),
       ),
@@ -108,30 +99,26 @@ class _HistoryDataViewState extends State<HistoryDataView> {
   }
 }
 
-List<PieChartSectionData> showingSections(history,int touchedIndex) {
-
-
+List<PieChartSectionData> showingSections(history, int touchedIndex) {
   List<PieChartSectionData> sections = new List<PieChartSectionData>();
 
-  for(var value in history){
+  for (var value in history) {
     final isTouched = history.indexOf(value) == touchedIndex;
     final double fontSize = isTouched ? 25 : 16;
     final double radius = isTouched ? 60 : 50;
-      sections.add(
-          PieChartSectionData(
-            color: HexColor(generateRandomHexColor()),
-            value: value["quantity"].toDouble(),
-            title: (100*value["quantity"]/value["total"]).toString()+"%",
-            radius: radius,
-            titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
-          )
-      );
+    sections.add(PieChartSectionData(
+      color: HexColor(value["color"]),
+      value: value["quantity"].toDouble(),
+      title: (100 * value["quantity"] / value["total"]).toString() + "%",
+      radius: radius,
+      titleStyle: TextStyle(
+          fontSize: fontSize,
+          fontWeight: FontWeight.bold,
+          color: const Color(0xffffffff)),
+    ));
   }
-  return sections;
 
+  return sections;
 }
 
 class Indicator extends StatelessWidget {
@@ -146,7 +133,7 @@ class Indicator extends StatelessWidget {
     this.color,
     this.text,
     this.isSquare,
-    this.size = 16,
+    this.size = 32,
     this.textColor = const Color(0xff505050),
   }) : super(key: key);
 
@@ -163,12 +150,12 @@ class Indicator extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: 4,
+          width: 10,
         ),
         Text(
-          getTranslated(context, text),
+          text,
           style: TextStyle(
-              fontSize: 12, fontWeight: FontWeight.bold, color: textColor),
+              fontSize: 24, fontWeight: FontWeight.bold, color: textColor),
         )
       ],
     );

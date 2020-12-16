@@ -16,7 +16,12 @@ class HistoryService{
 
       var materialsRefs = await MaterialService.instance.getAllMaterialsReferences();
       var aux = await FirebaseFirestore.instance.collection('history').where("uid", isEqualTo: FirebaseAuth.instance.currentUser.uid).get();
-      var total = aux.docs.length;
+      var total = 0;
+
+      for(var i in aux.docs){
+        total+= i.data()["quantity"];
+      }
+
       for(var material in materialsRefs){
         var snapshot = await FirebaseFirestore.instance.collection('history')
             .where("uid", isEqualTo: FirebaseAuth.instance.currentUser.uid)
@@ -24,11 +29,12 @@ class HistoryService{
             .get();
 
         var materialName = await MaterialService.instance.getByReference(material);
-        historic.add({"name":materialName["name"], "quantity":snapshot.docs.length,"total":total});
+
+        if(snapshot.docs.length!=0)
+        historic.add({"name":materialName["name"], "quantity":snapshot.docs[0]["quantity"],"total":total,"color":materialName["color"]});
       }
+
       return historic;
     }
   }
-
-
 }
