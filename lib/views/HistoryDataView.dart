@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:reciclame/localization/language_constants.dart';
+import 'package:reciclame/services/historyService.dart';
 
 class HistoryDataView extends StatefulWidget {
   @override
@@ -9,6 +10,11 @@ class HistoryDataView extends StatefulWidget {
 
 class _HistoryDataViewState extends State<HistoryDataView> {
   int touchedIndex;
+
+  Future getHistory() async {
+    var history =  await HistoryService.instance.getHistory();
+    return Future.value(history);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -41,4 +41,15 @@ class MaterialService {
 
     return res;
   }
+  getAllMaterialsReferences() async {
+    var snapshot = await FirebaseFirestore.instance.collection('material').get();
+
+    List res = new List();
+
+    snapshot.docs.forEach((doc) {
+      res.add(doc.reference);
+    });
+
+    return res;
+  }
 }
