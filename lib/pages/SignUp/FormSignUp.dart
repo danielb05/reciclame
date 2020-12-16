@@ -55,7 +55,8 @@ class _FormSignUpState extends State<FormSignUp> {
       var user = new CustomUser(userCredential.user.uid, false, fullName,
           "default", city, postalCode, 0, true);
       userData
-          .add(user.toJson())
+      .doc(userCredential.user.uid)
+          .set(user.toJson())
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
 
