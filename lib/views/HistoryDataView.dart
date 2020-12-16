@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:reciclame/localization/language_constants.dart';
 import 'package:reciclame/services/historyService.dart';
 
 class HistoryDataView extends StatefulWidget {
@@ -27,29 +28,31 @@ class _HistoryDataViewState extends State<HistoryDataView> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
-      child: Column(
+      child: FirebaseAuth.instance.currentUser!=null?Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _getPieChart(history),
-          (history.length!=0)?
-          Expanded(
-              child: ListView.separated(
-                itemCount: history.length,
-                itemBuilder: (BuildContext context, int index) {
-                  print(history[index]);
-                  return
-                     Indicator(
+          (history.length != 0)
+              ? Expanded(
+                  child: ListView.separated(
+                  itemCount: history.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    print(history[index]);
+                    return Indicator(
                       color: HexColor(history[index]["color"]),
-                      text: history[index]["name"]+" - "+history[index]["quantity"].toString() +" item/s",
+                      text: history[index]["name"] +
+                          " - " +
+                          history[index]["quantity"].toString() +
+                          " item/s",
                       isSquare: true,
                     );
-
-                },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(height: 10),
-          )):CircularProgressIndicator()
+                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(height: 10),
+                ))
+              : CircularProgressIndicator()
         ],
-      ),
+      ):Text("Log in required to recovery statistics."),
     );
   }
 
