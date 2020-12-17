@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
     _widgetOptions = [
       ChangeNotifierProvider(
           create: (context) => NewsArticleListViewModel(), child: NewsList()),
-      Text('Scan Object'), //Scan ObjectView
+      Text('Not Available!'), //Scan ObjectView
       BinLocatorView(), //LocationView
       FindView(),
       HistoryDataView(), //ListView
