@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/localization/language_constants.dart';
@@ -6,7 +8,7 @@ import 'package:reciclame/services/containserService.dart';
 import 'package:reciclame/services/materialService.dart';
 import 'package:reciclame/services/productService.dart';
 import 'package:reciclame/widgets/ItemWidget.dart';
-
+import "dart:core";
 import '../main.dart';
 
 class Item {
@@ -33,7 +35,6 @@ class _ItemDetailState extends State<ItemDetail> {
 
   @override
   void initState() {
-    (widget.arguments);
     // TODO: implement initState
     super.initState();
     setState(() {
@@ -44,6 +45,58 @@ class _ItemDetailState extends State<ItemDetail> {
         isMaterial = value;
       });
     });
+  }
+
+  showAlertDialog(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+    String quantity;
+    // set up the button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        try{
+
+        }catch(ex){
+          print(ex);
+        }
+        _formKey.currentState.save();
+
+        //Navigator.pop(context);
+        //Navigator.pushReplacementNamed(context, '/home');
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      content: Form(
+        key: _formKey,
+        child: TextFormField(
+          initialValue: "1",
+          keyboardType: TextInputType.number,
+          onSaved: (newValue) => quantity = (newValue),
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly
+          ],
+          decoration: InputDecoration(
+            labelText: "Quantity",
+            hintText: "Enter valid Quantity",
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            suffixIcon: Icon(Icons.add_circle_rounded, color: kPrimaryColor),
+          ),
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   Future getContainers() async {
@@ -172,11 +225,11 @@ class _ItemDetailState extends State<ItemDetail> {
                     }
                   },
                 ),
+                if(FirebaseAuth.instance.currentUser!=null)
                 RaisedButton.icon(
                   color: kPrimaryColor,
                   onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, '/home');
+                    showAlertDialog(context);
                   },
                   label: Text(getTranslated(context, 'title').toUpperCase()),
                   icon: Icon(Icons.restore_from_trash),
