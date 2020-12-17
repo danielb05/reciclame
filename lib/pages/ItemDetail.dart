@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,15 +55,18 @@ class _ItemDetailState extends State<ItemDetail> {
     Widget okButton = FlatButton(
       child: Text("OK"),
       onPressed: () {
+        _formKey.currentState.save();
         try{
-
+          for(var material in widget.arguments["materials"]){
+            FirebaseFirestore.instance.collection("history").add({"material":material,"uid":FirebaseAuth.instance.currentUser.uid,"quantity":int.parse(quantity).abs()}).then((value){
+              print("New item recycled: "+ value.toString());
+            });
+          }
+          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, '/home');
         }catch(ex){
           print(ex);
         }
-        _formKey.currentState.save();
-
-        //Navigator.pop(context);
-        //Navigator.pushReplacementNamed(context, '/home');
       },
     );
 
