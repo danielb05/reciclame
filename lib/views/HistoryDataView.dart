@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -28,31 +27,33 @@ class _HistoryDataViewState extends State<HistoryDataView> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
-      child: FirebaseAuth.instance.currentUser!=null?Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _getPieChart(history),
-          (history.length != 0)
-              ? Expanded(
-                  child: ListView.separated(
-                  itemCount: history.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    print(history[index]);
-                    return Indicator(
-                      color: HexColor(history[index]["color"]),
-                      text: history[index]["name"] +
-                          " - " +
-                          history[index]["quantity"].toString() +
-                          " item/s",
-                      isSquare: true,
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(height: 10),
-                ))
-              : CircularProgressIndicator()
-        ],
-      ):Text("Log in required to recovery statistics."),
+      child: FirebaseAuth.instance.currentUser != null
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _getPieChart(history),
+                (history.length != 0)
+                    ? Expanded(
+                        child: ListView.separated(
+                        itemCount: history.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          print(history[index]);
+                          return Indicator(
+                            color: HexColor(history[index]["color"]),
+                            text: history[index]["name"] +
+                                " - " +
+                                history[index]["quantity"].toString() +
+                                " item/s",
+                            isSquare: true,
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(height: 10),
+                      ))
+                    : CircularProgressIndicator()
+              ],
+            )
+          : Text("Log in required to recovery statistics."),
     );
   }
 
@@ -112,7 +113,7 @@ List<PieChartSectionData> showingSections(history, int touchedIndex) {
     sections.add(PieChartSectionData(
       color: HexColor(value["color"]),
       value: value["quantity"].toDouble(),
-      title: (100 * value["quantity"] / value["total"]).toString() + "%",
+      title: (100 * value["quantity"] / value["total"]).toStringAsFixed(2) + "%",
       radius: radius,
       titleStyle: TextStyle(
           fontSize: fontSize,

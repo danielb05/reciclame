@@ -36,10 +36,12 @@ class _ItemDetailState extends State<ItemDetail> {
 
   @override
   void initState() {
+    String lang = MyApp.getLang(context).split('_')[0];
     // TODO: implement initState
     super.initState();
+
     setState(() {
-      listItems.add(new Item(description: widget.arguments["description"]));
+      listItems.add(new Item(description: lang=="en"?widget.arguments["description"]:widget.arguments["description_ES"]));
     });
     ProductService.instance.isMaterial(widget.arguments["name"]).then((value) {
       setState(() {
@@ -192,8 +194,8 @@ class _ItemDetailState extends State<ItemDetail> {
                               itemBuilder: (BuildContext context, int index) {
                                 return Center(
                                     child: Chip(
-                                        label: Text(
-                                            '${snapshot.data[index]["name"]}')));
+                                        label: Text(lang=="en"?
+                                            '${snapshot.data[index]["name"]}':'${snapshot.data[index]["name_ES"]}')));
                               }),
                         );
                       }
@@ -219,8 +221,8 @@ class _ItemDetailState extends State<ItemDetail> {
                               itemBuilder: (BuildContext context, int index) {
                                 return Center(
                                     child: Chip(
-                                        label: Text(
-                                            '${snapshot.data[index]["name"]}'),
+                                        label: Text(lang=="en"?
+                                            '${snapshot.data[index]["name"]}':'${snapshot.data[index]["name_ES"]}'),
                                         backgroundColor: HexColor(
                                             snapshot.data[index]["color"])));
                               }),
