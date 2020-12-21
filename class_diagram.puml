@@ -40,7 +40,7 @@ class Material <<Material>>{
 	String name_ES
 	String description
 	String description_ES
-
+	String color
 }
 
 class Container <<Container>>{
@@ -49,6 +49,7 @@ class Container <<Container>>{
 	String description
 	String description_ES
 	List <String> enable_cities
+	String color
 }
 
 class Product<<Product>>{
@@ -67,6 +68,12 @@ class Property <<Property>>{
 	String description_ES
 }
 
+class History <<History>>{
+	Integer quantity
+}
+
+History "*"-- "1" User: By >
+History "1" -- "1" Material: compose >
 Product "1" -- "*" Material: contains >
 Product "*" -- "*" Property: has >
 User "*" -- "1" Location: locate >
