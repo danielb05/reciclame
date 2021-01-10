@@ -4,7 +4,8 @@ import 'package:reciclame/main.dart';
 import 'package:reciclame/services/materialService.dart';
 import 'package:reciclame/services/productService.dart';
 import 'package:reciclame/widgets/ItemWidget.dart';
-import 'package:reciclame/widgets/MaterialWidget.dart';
+import 'package:showcaseview/showcase.dart';
+import 'package:showcaseview/showcase_widget.dart';
 
 class FindView extends StatefulWidget {
   @override
@@ -17,6 +18,12 @@ class _FindViewState extends State<FindView> {
   List<dynamic> entries;
   List<dynamic> materialEntries;
   bool search;
+
+  GlobalKey _one = GlobalKey();
+  GlobalKey _two = GlobalKey();
+  GlobalKey _three = GlobalKey();
+  GlobalKey _four = GlobalKey();
+  GlobalKey _five = GlobalKey();
 
   @override
   void initState() {
@@ -50,6 +57,8 @@ class _FindViewState extends State<FindView> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => ShowCaseWidget.of(context).startShowCase([_one,_two,_three]));
+
     String lang = MyApp.getLang(context).split('_')[0];
     return Container(
       child: FutureBuilder(
@@ -64,7 +73,7 @@ class _FindViewState extends State<FindView> {
                     children: [
                       // TODO: Autocomplete Input (Optional)
                       // TODO: Find element depending language
-                      TextField(
+                      Showcase(key: _one, child: TextField(
                         controller: _name,
                         onSubmitted: (String value) async {
                           if (value != "") {
@@ -94,7 +103,8 @@ class _FindViewState extends State<FindView> {
                               },
                               icon: Icon(Icons.clear),
                             )),
-                      ),
+                      ), description: "Use the product name to find the correct bind."),
+
                       SizedBox(height: 25.0),
                       if(search)
                         Expanded(
@@ -126,7 +136,7 @@ class _FindViewState extends State<FindView> {
                                     Navigator.pushNamed(context, '/item',
                                         arguments: materialEntries[index]);
                                   },
-                                  child: ItemWidget(entries: materialEntries[index]),
+                                  child: index == 0 ? Showcase(key: _two,child: ItemWidget(entries: materialEntries[index]), description: "Find the product according to material composition."):ItemWidget(entries: materialEntries[index]),
                                 );
                               },
                               separatorBuilder: (BuildContext context, int index) =>

@@ -46,6 +46,7 @@ dependencies:
   cloud_firestore: ^0.14.4
   firebase_storage: ^5.0.1
   hexcolor: ^1.0.4
+  showcaseview: ^0.1.6
   #firebase_auth_web: ^0.3.2
 dev_dependencies:
   flutter_test:

@@ -22,6 +22,7 @@ import 'package:reciclame/views/FindView.dart';
 import 'package:reciclame/views/HistoryDataView.dart';
 import 'package:reciclame/views/newsViews/newsArticleListViewModel.dart';
 import 'package:reciclame/views/newsViews/newsList.dart';
+import 'package:showcaseview/showcase_widget.dart';
 
 import '../constants.dart';
 
@@ -74,15 +75,23 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: ShowCaseWidget(
+        onStart: (index, key) {},
+        onComplete: (index, key) {},
+        builder: Builder(
+            builder: (context) => Center(
+                  child: _widgetOptions.elementAt(_selectedIndex),
+                )),
+        autoPlayDelay: Duration(seconds: 3),
+        autoPlayLockEnable: true,
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.new_releases_sharp), label: ''),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.new_releases_sharp), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
