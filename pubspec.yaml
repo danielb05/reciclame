@@ -46,7 +46,7 @@ dependencies:
   cloud_firestore: ^0.14.4
   firebase_storage: ^5.0.1
   hexcolor: ^1.0.4
-  showcaseview: ^0.1.6
+  introduction_screen: ^1.0.7
   #firebase_auth_web: ^0.3.2
 dev_dependencies:
   flutter_test:
@@ -75,7 +75,10 @@ flutter:
     - assets/Coke Can.jpg
     - assets/Coke Glass Bottle.jpg
     - assets/Coke PET Bottle.jpg
-    - assets/news.png
+    - assets/finde_logo.png
+    - assets/map_pin.png
+    - assets/news_logo.png
+    - assets/charts_logo.png
     - lib/lang/en.json
     - lib/lang/es.json
 

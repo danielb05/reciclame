@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:reciclame/constants.dart';
 import 'package:reciclame/pages/Home.dart';
+import 'package:reciclame/pages/Introduction.dart';
 import 'package:reciclame/pages/ItemDetail.dart';
 import 'package:reciclame/pages/Login/Login.dart';
 import 'package:reciclame/pages/Opening.dart';
@@ -92,6 +93,7 @@ class _MyAppState extends State<MyApp> {
         initialRoute: '/opening',
         routes: {
           '/home': (context) => Home(),
+          '/introduction':(context) => IntroScreen(),
           '/login': (context) => Login(),
           '/opening': (context) => Opening(),
           '/settings': (context) =>

@@ -22,7 +22,6 @@ import 'package:reciclame/views/FindView.dart';
 import 'package:reciclame/views/HistoryDataView.dart';
 import 'package:reciclame/views/newsViews/newsArticleListViewModel.dart';
 import 'package:reciclame/views/newsViews/newsList.dart';
-import 'package:showcaseview/showcase_widget.dart';
 
 import '../constants.dart';
 
@@ -75,16 +74,7 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      body: ShowCaseWidget(
-        onStart: (index, key) {},
-        onComplete: (index, key) {},
-        builder: Builder(
-            builder: (context) => Center(
-                  child: _widgetOptions.elementAt(_selectedIndex),
-                )),
-        autoPlayDelay: Duration(seconds: 3),
-        autoPlayLockEnable: true,
-      ),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
