@@ -13,7 +13,7 @@ class _OpeningState extends State<Opening> {
   void initState() {
     SharedPreferences.getInstance().then((value){
       setState(() {
-        isFirstTime = value.getBool("isFirstTime") ?? false;
+        isFirstTime = value.getBool("isFirstTime") ?? true;
         //isFirstTime = true;
       });
     });

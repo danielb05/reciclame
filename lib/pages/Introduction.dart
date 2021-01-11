@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:reciclame/pages/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
@@ -13,18 +12,16 @@ class _IntroScreenState extends State<IntroScreen> {
   final introKey = GlobalKey<_IntroScreenState>();
 
   void _onIntroEnd(context) {
-    SharedPreferences.getInstance().then((value){
+    SharedPreferences.getInstance().then((value) {
       setState(() {
         value.setBool("isFirstTime", false);
       });
     });
 
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => Home()),
-    );
+    Navigator.of(context).pushReplacementNamed('/home');
   }
 
-  Widget _buildImage(String assetName,String extension) {
+  Widget _buildImage(String assetName, String extension) {
     return Align(
       child: Image.asset('assets/$assetName.$extension', width: 350.0),
       alignment: Alignment.bottomCenter,
@@ -33,7 +30,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   void initState() {
-    SharedPreferences.getInstance().then((value){
+    SharedPreferences.getInstance().then((value) {
       setState(() {
         value.setBool("isFirstTime", true);
       });
@@ -58,29 +55,29 @@ class _IntroScreenState extends State<IntroScreen> {
         PageViewModel(
           title: "Purpose",
           body:
-          "This app has the objective to increase the recycling and save the earth.",
-          image: _buildImage('anonymous',"jpg"),
+              "This app has the objective to increase the recycling and save the earth.",
+          image: _buildImage('anonymous', "jpg"),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Search",
           body:
-          "This app permits you to find a product and know the materials that it is composed.",
-          image: _buildImage('finde_logo',"png"),
+              "This app permits you to find a product and know the materials that it is composed.",
+          image: _buildImage('finde_logo', "png"),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Location",
-          image: _buildImage('map_pin',"png"),
-          body:
-          "You can find the nearest bin to recycle.",
+          image: _buildImage('map_pin', "png"),
+          body: "You can find the nearest bin to recycle.",
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "News",
-          body: "You can know the most recently news about recycling and environment.",
+          body:
+              "You can know the most recently news about recycling and environment.",
           decoration: pageDecoration,
-          image: _buildImage('news_logo',"png"),
+          image: _buildImage('news_logo', "png"),
         ),
         PageViewModel(
           title: "Statistics",
@@ -107,5 +104,3 @@ class _IntroScreenState extends State<IntroScreen> {
     );
   }
 }
-
-
