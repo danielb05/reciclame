@@ -79,6 +79,7 @@ flutter:
     - assets/map_pin.png
     - assets/news_logo.png
     - assets/charts_logo.png
+    - assets/ScanImage.jpeg
     - lib/lang/en.json
     - lib/lang/es.json
 

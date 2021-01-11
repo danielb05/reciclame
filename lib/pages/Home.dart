@@ -22,8 +22,8 @@ import 'package:reciclame/views/FindView.dart';
 import 'package:reciclame/views/HistoryDataView.dart';
 import 'package:reciclame/views/newsViews/newsArticleListViewModel.dart';
 import 'package:reciclame/views/newsViews/newsList.dart';
-
 import '../constants.dart';
+import 'ScanProduct.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
     _widgetOptions = [
       ChangeNotifierProvider(
           create: (context) => NewsArticleListViewModel(), child: NewsList()),
-      Text('Not Available!'), //Scan ObjectView
+      ScanProduct(),
       BinLocatorView(), //LocationView
       FindView(),
       HistoryDataView(), //ListView
