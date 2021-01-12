@@ -22,8 +22,8 @@ import 'package:reciclame/views/FindView.dart';
 import 'package:reciclame/views/HistoryDataView.dart';
 import 'package:reciclame/views/newsViews/newsArticleListViewModel.dart';
 import 'package:reciclame/views/newsViews/newsList.dart';
-
 import '../constants.dart';
+import 'ScanProduct.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
     _widgetOptions = [
       ChangeNotifierProvider(
           create: (context) => NewsArticleListViewModel(), child: NewsList()),
-      Text('Not Available!'), //Scan ObjectView
+      ScanProduct(),
       BinLocatorView(), //LocationView
       FindView(),
       HistoryDataView(), //ListView
@@ -74,15 +74,14 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.new_releases_sharp), label: ''),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.new_releases_sharp), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.camera_alt), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
